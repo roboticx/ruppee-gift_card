@@ -1,7 +1,13 @@
+import CardDetails from "./Components/CardDetails"
+
 
 const App = () => {
+
   return (
-    <div>App</div>
+<>
+<CardDetails/>
+  </>
+
   )
 }
 
