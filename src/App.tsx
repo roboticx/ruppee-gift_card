@@ -1,13 +1,9 @@
-import CardDetails from "./Components/CardDetails"
-
+import AppRoutes from "./routes/AppRoutes"
 
 const App = () => {
 
   return (
-<>
-<CardDetails/>
-  </>
-
+    <AppRoutes />
   )
 }
 
