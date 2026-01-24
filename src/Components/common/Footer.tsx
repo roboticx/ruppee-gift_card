@@ -19,32 +19,26 @@ const Footer = () => {
                         <div className="w-[20%]">
                             <ul className="flex flex-col gap-2">
                                 <li
-                                    className="
-                                        font-inter 
+                                    className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center
-                                    "
+                                        inline-flex items-center"
                                 >
                                     About Us
                                 </li>
                                 <li
-                                    className="
-                                        font-inter 
+                                    className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center
-                                    "
+                                        inline-flex items-center"
                                 >
                                     Terms and Condition
                                 </li>
                                 <li
-                                    className="
-                                        font-inter 
+                                    className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center
-                                    "
+                                        inline-flex items-center"
                                 >
                                     Privacy Policy
                                 </li>
@@ -53,22 +47,18 @@ const Footer = () => {
                         <div className="w-[20%]">
                             <ul className="flex flex-col gap-2">
                                 <li
-                                    className="
-                                        font-inter 
+                                    className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center
-                                    "
+                                        inline-flex items-center"
                                 >
                                     Shipping Policy
                                 </li>
                                 <li
-                                    className="
-                                        font-inter 
+                                    className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center
-                                    "
+                                        inline-flex items-center"
                                 >
                                     Cancellation and Refund Policy
                                 </li>
@@ -85,13 +75,11 @@ const Footer = () => {
                                     className="w-[12.67px] h-[12.67px]"
                                 />
                                 <span
-                                    className="
-                                        ml-1.75
+                                    className="ml-1.75
                                         inline-flex items-center
                                         font-inter font-medium
                                         text-[13px] leading-[150%]
-                                        text-white
-                                    "
+                                        text-white"
                                 >
                                     8860262227
                                 </span>
@@ -104,13 +92,11 @@ const Footer = () => {
                                     className="w-[12.67px] h-[12.67px]"
                                 />
                                 <span
-                                    className="
-                                        ml-1.75
+                                    className="ml-1.75
                                         inline-flex items-center
                                         font-inter font-medium
                                         text-[13px] leading-[150%]
-                                        text-white
-                                    "
+                                        text-white"
                                 >
                                     wazirz@wazirzsmindiapvtltd.com
                                 </span>
@@ -125,13 +111,11 @@ const Footer = () => {
                                     className="w-[15.67px] h-[15.67px]"
                                 />
                                 <span
-                                    className="
-                                        ml-1.75
+                                    className="ml-1.75
                                         inline-flex items-center
                                         font-inter font-medium
                                         text-[12px] leading-[150%]
-                                        text-white
-                                    "
+                                        text-white"
                                 >
                                     3097, FLAT NO 2 LEFT SIDE, 2ND FLOOR BACK SIDE GALI NO 34,
                                     TUGHLAKABAD EXTN, Delhi, India - 110019
@@ -147,12 +131,10 @@ const Footer = () => {
             <hr />
             <div className="flex py-5 justify-center">
                 <span
-                    className="
-                        font-inter font-medium
+                    className="font-inter font-medium
                         text-[16px] leading-[150%]
                         text-white
-                        inline-flex items-center
-                    "
+                        inline-flex items-center"
                 >
                     Wazirz © 2025. All rights reserved
                 </span>
