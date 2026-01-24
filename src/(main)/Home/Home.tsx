@@ -1,5 +1,5 @@
 import Recommended from "./Recommended"
-import WazirExclusive from "./WazirExclusive";
+import Exclusive from "./Exclusive";
 
 const Home = () => {
     return (
@@ -9,7 +9,7 @@ const Home = () => {
                 <img src="/images/banner.gif" alt="banner" className="mx-auto mw-100 min-w-full" />
             </div>
 
-            <WazirExclusive />
+            <Exclusive />
 
             <Recommended />
 

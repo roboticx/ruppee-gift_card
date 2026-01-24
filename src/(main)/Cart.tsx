@@ -19,16 +19,17 @@ const Cart = () => {
                     <div className="relative flex items-center gap-3 px-4 h-full">
                         <input
                             type="checkbox"
-                            className="h-5 w-5 rounded border-[#2B6777] accent-[#2B6777] "
+                            className="h-8 w-8 rounded border-[#2B6777] accent-[#2B6777] "
                         />
 
                         <span className="text-md font-medium text-gray-800">
                             This is Gift
                         </span>
 
-                        <div className="ml-auto text-[#2B6777] text-[31px]">
-                            <IoMdInformationCircleOutline />
+                        <div className="ml-auto text-[#2B6777]">
+                            <IoMdInformationCircleOutline size={26} />
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -36,86 +37,203 @@ const Cart = () => {
             {/* Form */}
             <div className="mx-6 mt-6 space-y-5">
                 <div>
-                    <label className="block text-sm text-gray-700 mb-1">
+                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
                         Recipient Name
                     </label>
+
                     <input
-                        placeholder="Recipient Name"
-                        className="w-full rounded-md border border-blue-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                        placeholder="Enter Recipient Name"
+                        className="
+                            w-full h-12
+                            rounded-lg
+                            border border-[#2B6777]
+                            font-inter
+                            text-[20px]
+                            font-normal
+                            leading-[150%]
+                            tracking-normal
+                            px-4
+                            text-gray-800
+                            placeholder:text-gray-400
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-[#2B6777]
+                        "
                     />
                 </div>
 
                 <div>
-                    <label className="block text-sm text-gray-700 mb-1">
+                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
                         Recipient Email
                     </label>
+
                     <input
-                        placeholder="Recipient Email"
-                        className="w-full rounded-md border border-blue-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                        placeholder="Enter Recipient Email"
+                        className="
+                            w-full h-12
+                            rounded-lg
+                            border border-[#2B6777]
+                            font-inter
+                            text-[20px]
+                            font-normal
+                            leading-[150%]
+                            tracking-normal
+                            px-4
+                            text-gray-800
+                            placeholder:text-gray-400
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-[#2B6777]
+                        "
                     />
                 </div>
 
                 <div>
-                    <label className="block text-sm text-gray-700 mb-1">
+                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
                         Recipient Mobile Number
                     </label>
+
                     <input
-                        placeholder="Recipient Mobile Number"
-                        className="w-full rounded-md border border-blue-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                        placeholder="Enter Recipient Mobile Number"
+                        className="
+                            w-full h-12
+                            rounded-lg
+                            border border-[#2B6777]
+                            font-inter
+                            text-[20px]
+                            font-normal
+                            leading-[150%]
+                            tracking-normal
+                            px-4
+                            text-gray-800
+                            placeholder:text-gray-400
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-[#2B6777]
+                        "
                     />
                 </div>
 
                 <div>
-                    <label className="block text-sm text-gray-700 mb-1">
+                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
                         Message
                     </label>
+
                     <input
                         placeholder="Enter Message"
-                        className="w-full rounded-md border border-blue-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                        className="
+                            w-full h-12
+                            rounded-lg
+                            border border-[#2B6777]
+                            font-inter
+                            text-[20px]
+                            font-normal
+                            leading-[150%]
+                            tracking-normal
+                            px-4
+                            text-gray-800
+                            placeholder:text-gray-400
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-[#2B6777]
+                        "
                     />
+
                 </div>
 
                 {/* Buttons */}
                 <div className="flex justify-end gap-3 pt-2">
-                    <button className="px-6 py-2 rounded-md border border-teal-400 text-sm text-gray-600">
+                    <button className="w-27.75 h-9
+                        rounded-lg
+                        border border-[#C8CBCC]
+                        bg-transparent
+                        font-sen
+                        text-[14px]
+                        font-normal
+                        leading-[120%]
+                        tracking-normal
+                        text-[#8D8C8C]
+                        flex items-center justify-center
+                        text-center"
+                    >
                         Cancel
                     </button>
-                    <button className="px-6 py-2 rounded-md bg-teal-700 text-sm text-white">
+
+                    <button className="w-[87.38px] h-9
+                        rounded-lg
+                        bg-[#2B6777]
+                        font-sen
+                        text-[14px]
+                        font-normal
+                        leading-[120%]
+                        tracking-normal
+                        text-white
+                        flex items-center justify-center
+                        text-center"
+                    >
                         Save
                     </button>
+
                 </div>
             </div>
 
             {/* Cart */}
             <div className="mx-6 mt-8">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-base font-semibold text-gray-800">
+                    <h2 className="font-sen text-[24px] font-semibold leading-[120%] tracking-normal align-middle text-gray-800">
                         In Your Cart
-                    </h2>
-                    <button className="rounded-md bg-teal-700 px-4 py-1.5 text-xs text-white">
+                    </h2><button className="
+                                    w-[87.38px] h-9
+                                    rounded-lg
+                                    bg-[#2B6777]
+                                    font-sen
+                                    text-[14px]
+                                    font-normal
+                                    leading-[120%]
+                                    tracking-normal
+                                    text-white
+                                    flex items-center justify-center
+                                    text-center
+                                "
+                                >
                         Add Cart
                     </button>
+
+
                 </div>
 
                 <div className="flex gap-6">
-                    <Card />
                     <Card />
                 </div>
             </div>
 
             {/* Footer */}
-            <div className="mt-10 bg-gray-100 py-4 px-6 flex justify-between items-center text-sm text-gray-700">
-                <div className="flex items-center gap-2">
-                    <span>🛡️</span>
-                    <span>Safe and Secure Payments</span>
+            <div className="w-full my-10 h-auto sm:h-20.75 rounded-lg bg-[#2B67770F] flex flex-col sm:flex-row">
+                {/* Safe and Secure Payments */}
+                <div className="w-full sm:w-1/2 flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-0">
+                    <img
+                        src="/icons/vir.svg"
+                        alt="Safe and Secure Payments"
+                        className="w-8 h-9 sm:w-[30.75px] sm:h-[37.58px]"
+                    />
+                    <span className="font-inter font-normal text-base sm:text-[20px] leading-[150%] tracking-[0%]">
+                        Safe and Secure Payments
+                    </span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <span>📞</span>
-                    <span>
-                        Need Help? <span className="text-teal-700">Contact Us</span>
+
+                {/* Need Help? Contact Us */}
+                <div className="w-full sm:w-1/2 flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-0">
+                    <img
+                        src="/icons/calll.svg"
+                        alt="Contact Us"
+                        className="w-8 h-8 sm:w-[30.47px] sm:h-[30.47px]"
+                    />
+                    <span className="font-inter font-normal text-base sm:text-[20px] leading-[150%] tracking-[0%]">
+                        Need Help? <span className="text-[#2B6777]">Contact Us</span>
                     </span>
                 </div>
             </div>
+
         </div>
     );
 }
