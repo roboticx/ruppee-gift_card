@@ -6,7 +6,7 @@ interface Category {
   imageUrl: string;
 }
 
-const WazirExclusive: React.FC = () => {
+const Exclusive: React.FC = () => {
   const categories: Category[] = [
     { name: "Grocery", imageUrl: "grocery.jpg" },
     { name: "Kitchen Appliances", imageUrl: "kitchen-appliances.jpg" },
@@ -89,14 +89,13 @@ const WazirExclusive: React.FC = () => {
     text-gray-900
   "
 >
-  Wazirz Exclusive
+  RoboticX Exclusive
 </h2>
 
 
         <div className="flex items-center gap-2">
      <button
-  className="
-    h-8 w-[94px]
+  className="h-8 w-23.5
     px-4
     rounded-lg
     border border-[#00C8DA]
@@ -104,8 +103,7 @@ const WazirExclusive: React.FC = () => {
     text-[#00EAFF]
     text-[14px] font-medium
     shadow-[0px_0px_6px_1px_#00EAFF40]
-    flex items-center justify-center
-  "
+    flex items-center justify-center"
 >
   Category
 </button>
@@ -165,4 +163,4 @@ const WazirExclusive: React.FC = () => {
   );
 };
 
-export default WazirExclusive;
+export default Exclusive;
