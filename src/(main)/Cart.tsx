@@ -1,11 +1,35 @@
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import Card from "../Components/Card";
+import CardList from "../Components/Card/CardList";
 
 
 const Cart = () => {
 
+    const cardData = [
+        {
+            amount: 500,
+            id: '3',
+            imgUrl: '/images/cards/rs.png',
+            cardCount: 2,
+            storeImg: "/images/cards/bklt.jpg",
+        },
+        {
+            amount: 500,
+            id: '4',
+            imgUrl: '/images/cards/rs.png',
+            cardCount: 2,
+            storeImg: "/images/cards/bklt.jpg",
+        },
+        {
+            amount: 500,
+            id: '5',
+            imgUrl: '/images/cards/rs.png',
+            cardCount: 2,
+            storeImg: "/images/cards/bklt.jpg",
+        },
+    ];
+
     return (
-        <div className="w-full bg-white">
+        <div className="w-full bg-white px-3">
             {/* Gift Banner */}
             <div className="mx-6 mt-6 rounded-md overflow-hidden">
                 <div className="relative h-25 w-full">
@@ -36,14 +60,15 @@ const Cart = () => {
 
             {/* Form */}
             <div className="mx-6 mt-6 space-y-5">
-                <div>
-                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
-                        Recipient Name
-                    </label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                    <div>
+                        <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
+                            Recipient Name
+                        </label>
 
-                    <input
-                        placeholder="Enter Recipient Name"
-                        className="
+                        <input
+                            placeholder="Enter Recipient Name"
+                            className="
                             w-full h-12
                             rounded-lg
                             border border-[#2B6777]
@@ -59,17 +84,17 @@ const Cart = () => {
                             focus:ring-1
                             focus:ring-[#2B6777]
                         "
-                    />
-                </div>
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
-                        Recipient Email
-                    </label>
+                    <div>
+                        <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
+                            Recipient Email
+                        </label>
 
-                    <input
-                        placeholder="Enter Recipient Email"
-                        className="
+                        <input
+                            placeholder="Enter Recipient Email"
+                            className="
                             w-full h-12
                             rounded-lg
                             border border-[#2B6777]
@@ -85,17 +110,17 @@ const Cart = () => {
                             focus:ring-1
                             focus:ring-[#2B6777]
                         "
-                    />
-                </div>
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
-                        Recipient Mobile Number
-                    </label>
+                    <div>
+                        <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
+                            Recipient Mobile Number
+                        </label>
 
-                    <input
-                        placeholder="Enter Recipient Mobile Number"
-                        className="
+                        <input
+                            placeholder="Enter Recipient Mobile Number"
+                            className="
                             w-full h-12
                             rounded-lg
                             border border-[#2B6777]
@@ -111,32 +136,33 @@ const Cart = () => {
                             focus:ring-1
                             focus:ring-[#2B6777]
                         "
-                    />
+                        />
+                    </div>
                 </div>
+
 
                 <div>
                     <label className="block font-inter text-[20px] font-normal leading-[150%] tracking-normal text-gray-700 mb-1">
                         Message
                     </label>
 
-                    <input
+                    <textarea
                         placeholder="Enter Message"
-                        className="
-                            w-full h-12
+                        className="w-full 
+                            px-4 py-3
                             rounded-lg
                             border border-[#2B6777]
                             font-inter
-                            text-[20px]
                             font-normal
+                            text-[20px]
                             leading-[150%]
                             tracking-normal
-                            px-4
                             text-gray-800
                             placeholder:text-gray-400
                             focus:outline-none
                             focus:ring-1
-                            focus:ring-[#2B6777]
-                        "
+                            focus:ring-[#2B6777]"
+                        rows={3}
                     />
 
                 </div>
@@ -154,7 +180,10 @@ const Cart = () => {
                         tracking-normal
                         text-[#8D8C8C]
                         flex items-center justify-center
-                        text-center"
+                        text-center
+                        shadow-[0px_0px_6px_1px_#00EAFF40]
+                        "
+
                     >
                         Cancel
                     </button>
@@ -169,7 +198,9 @@ const Cart = () => {
                         tracking-normal
                         text-white
                         flex items-center justify-center
-                        text-center"
+                        text-center
+                        shadow-[0px_0px_6px_1px_#00EAFF40]
+                        "
                     >
                         Save
                     </button>
@@ -194,17 +225,15 @@ const Cart = () => {
                                     text-white
                                     flex items-center justify-center
                                     text-center
+                                    shadow-[0px_0px_6px_1px_#00EAFF40]
                                 "
-                                >
+                    >
                         Add Cart
                     </button>
-
-
                 </div>
 
-                <div className="flex gap-6">
-                    <Card />
-                </div>
+                <CardList cardsData={cardData} />
+
             </div>
 
             {/* Footer */}

@@ -1,6 +1,31 @@
-import Card from './Card'
+import CardList from '../Components/Card/CardList';
 
 const CardDetails = () => {
+
+  const cardData = [
+    {
+      amount: 500,
+      id: '3',
+      imgUrl: '/images/cards/rs.png',
+      cardCount: 2,
+      storeImg: "/images/cards/bklt.jpg",
+    },
+    {
+      amount: 500,
+      id: '4',
+      imgUrl: '/images/cards/rs.png',
+      cardCount: 2,
+      storeImg: "/images/cards/bklt.jpg",
+    },
+    {
+      amount: 500,
+      id: '5',
+      imgUrl: '/images/cards/rs.png',
+      cardCount: 2,
+      storeImg: "/images/cards/bklt.jpg",
+    },
+  ];
+
   return (
     <div className="flex justify-center px-4 sm:px-6 py-10">
       <div className="w-full max-w-[350.5px] sm:max-w-175 lg:max-w-300">
@@ -53,11 +78,15 @@ const CardDetails = () => {
 
         {/* Additional Card Component */}
         <div className="mt-6">
-          <div className="w-full"><p className="font-inter font-semibold text-[20px] px-8 py-3 leading-7.5">
-            Cards by details
-          </p>
-            <hr className="border-t border-slate-400/60" />
-            <Card />
+          <div className="w-full">
+            <p className="font-inter font-semibold text-[20px] px-8 py-3 leading-7.5">
+              Cards by details
+            </p>
+
+            <hr className="border-t border-slate-400/60 pb-4" />
+
+            <CardList cardsData={cardData} />
+
           </div>
         </div>
       </div>
