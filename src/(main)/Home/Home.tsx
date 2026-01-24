@@ -3,10 +3,10 @@ import WazirExclusive from "./WazirExclusive";
 
 const Home = () => {
     return (
-        <div className="mx-auto max-w-375" >
+        <div className="mx-auto max-w-330" >
 
             <div className="flex p-0 m-0">
-                <img src="/images/banner.gif" alt="banner" className="mx-auto mw-100 min-w-[75vw]" />
+                <img src="/images/banner.gif" alt="banner" className="mx-auto mw-100 min-w-full" />
             </div>
 
             <WazirExclusive />

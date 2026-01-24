@@ -2,11 +2,14 @@ import Card from './Card'
 
 const CardDetails = () => {
   return (
-    <div className="flex justify-center px-2  py-10">
-      <div className="w-full  max-w-350.5 ">
+    <div className="flex justify-center px-4 sm:px-6 py-10">
+      <div className="w-full max-w-[350.5px] sm:max-w-[700px] lg:max-w-[1200px]">
+
+        {/* Card Container */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 rounded-2xl bg-white py-6 md:py-8 px-4 md:px-8">
+          
           {/* Image Container */}
-          <div className="w-full md:w-57.5 md:h-57.5 flex items-center justify-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+          <div className="w-full md:w-[230px] md:h-[230px] flex items-center justify-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
             <img
               src={'/images/cards/sct.jpg'}
               alt="Blink It"
@@ -20,13 +23,13 @@ const CardDetails = () => {
               Blink It
             </h1>
 
-            <p className="font-inter font-normal text-[16px] md:text-[20px] leading-6 md:leading-7.5 tracking-normal text-gray-600">
+            <p className="font-inter font-normal text-[14px] sm:text-[16px] md:text-[20px] leading-5 sm:leading-6 md:leading-7.5 tracking-normal text-gray-600">
               Blink It is committed to delivering high-quality, fresh, and trusted products with up to 25% off, making everyday living healthier and more convenient. With a strong focus on quality sourcing and customer satisfaction, Blink It has become a preferred choice for households across India.
             </p>
 
             <div className="flex justify-end mt-auto">
               <button
-                className="w-27.5 h-9 md:w-30.25 md:h-9.5 flex items-center justify-center rounded-lg border border-[#1090B2] bg-[#DFF5FF] text-[#1090B2] font-inter font-medium text-[12px] md:text-[14px] hover:bg-[#cfefff] transition"
+                className="w-24 h-9 sm:w-28 md:w-30.25 md:h-9.5 flex items-center justify-center rounded-lg border border-[#1090B2] bg-[#DFF5FF] text-[#1090B2] font-inter font-medium text-[12px] sm:text-[13px] md:text-[14px] hover:bg-[#cfefff] transition"
               >
                 Read more
               </button>
@@ -34,28 +37,25 @@ const CardDetails = () => {
           </div>
         </div>
 
-        {/*  */}
-<div className='px-10'>
+        {/* Banner Image */}
+        <div className="px-0 sm:px-4 lg:px-10 mt-6">
           <div
-          className="
-            w-[1350px]
-            h-30
-            sm:h-35
-            md:h-40.25
-            lg:h-45
-            bg-center bg-cover bg-no-repeat
-            my-6 sm:my-8
-            rounded-xl
-            shadow-xl
-            overflow-hidden
-          "
-          style={{ backgroundImage: `url(${'/images/cards/banner.png'})` }}
-        >
+            className="
+              w-full
+              aspect-[4/1] sm:aspect-[5/1] md:aspect-[6/1]
+              bg-center bg-cover bg-no-repeat
+              rounded-xl
+              shadow-xl
+              overflow-hidden
+            "
+            style={{ backgroundImage: `url('/images/cards/banner.png')` }}
+          ></div>
         </div>
-</div>
 
-        {/*  */}
-        <Card />
+        {/* Additional Card Component */}
+        <div className="mt-6">
+          <Card />
+        </div>
       </div>
     </div>
   )
