@@ -22,7 +22,7 @@ const NumberModal: React.FC<NumberModalProps> = ({ isOpen, setIsOpen }) => {
       onClick={() => setIsOpen(false)} // click outside closes
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-11/12 sm:w-[400px] p-6 relative"
+        className="bg-white rounded-2xl shadow-2xl w-11/12 sm:w-100 p-6 relative"
         onClick={(e) => e.stopPropagation()} // click inside modal prevents close
       >
         <button
