@@ -41,7 +41,7 @@ const StoreComponent = ({ store }: any) => {
                                                             text-[#00EAFF]
                                                         bg-[#00EAFF14]
                                                             flex items-center justify-center"
-                                                                onClick={() => navigate('/card-details')}
+                        onClick={() => navigate('/card-details')}
                     >
                         <GrAdd />
                     </button>

@@ -3,8 +3,8 @@ import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
     return (
-        <header className="bg-[#2B6777] h-20.25 flex items-center justify-center px-4 md:px-0">
-            <div className="w-full md:w-350.5">
+        <header className="bg-[#2B6777] h-20.25  flex items-center justify-center px-4 md:px-0">
+            <div className="w-full md:w-[1290px]">
                 <div className="relative flex h-20.25 items-center justify-between">
 
                     {/* LEFT */}
