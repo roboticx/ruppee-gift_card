@@ -12,6 +12,7 @@ const AuthLayout = () => {
             <main className="min-h-screen">
                 <Outlet />
             </main>
+            <Footer />
             {
                 isLoggedIn && <Footer />
             }

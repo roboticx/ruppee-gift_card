@@ -35,26 +35,19 @@ const CardDetails = () => {
         </div>
 
         {/*  */}
-<div className='px-10'>
+        <div className='px-10'>
           <div
-          className="
-            w-[1350px]
-            h-30
-            sm:h-35
-            md:h-40.25
-            lg:h-45
-            bg-center bg-cover bg-no-repeat
-            my-6 sm:my-8
-            rounded-xl
-            shadow-xl
-            overflow-hidden
-          "
-          style={{ backgroundImage: `url(${'/images/cards/banner.png'})` }}
-        >
+            className="w-337.5 h-30 sm:h-35 md:h-40.25 lg:h-45
+              bg-center bg-cover bg-no-repeat
+              my-6 sm:my-8
+              rounded-xl
+              shadow-xl
+              overflow-hidden
+              bg-[url(/images/cards/banner.png)]"
+          >
+          </div>
         </div>
-</div>
 
-        {/*  */}
         <Card />
       </div>
     </div>

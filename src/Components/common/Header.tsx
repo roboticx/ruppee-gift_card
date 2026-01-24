@@ -10,10 +10,10 @@ const Header = () => {
                     <div className="flex items-center gap-2">
                         <button
                             className="w-18.5 h-8 
-             text-white text-[14px] 
-             rounded-lg 
-             border border-[#00EAFF]
-             flex items-center justify-center"
+                                text-white text-[14px] 
+                                rounded-lg 
+                                border border-[#00EAFF]
+                                flex items-center justify-center"
                         >
                             Login
                         </button>
@@ -21,10 +21,10 @@ const Header = () => {
 
                         <button
                             className="w-18.5 h-8
-             text-white text-[14px]
-             rounded-lg
-             border border-[#00EAFF]
-             flex items-center justify-center"
+                                text-white text-[14px]
+                                rounded-lg
+                                border border-[#00EAFF]
+                                flex items-center justify-center"
                         >
                             Home
                         </button>
@@ -54,24 +54,22 @@ const Header = () => {
                             type="text"
                             placeholder="Search product"
                             className="
-      w-full h-full
-      bg-[#2B6777]
-      border border-[#00EAFF]
-      rounded-2xl
-      pl-3 pr-10
-      text-[13px] text-white
-      placeholder-white/70
-      focus:outline-none
-    "
+                                w-full h-full
+                                bg-[#2B6777]
+                                border border-[#00EAFF]
+                                rounded-2xl
+                                pl-3 pr-10
+                                text-[13px] text-white
+                                placeholder-white/70
+                                focus:outline-none
+                                "
                         />
 
                         {/* Search Icon */}
                         <span
-                            className="
-      absolute right-2 top-1/2 -translate-y-1/2
-      w-4 h-4
-      flex items-center justify-center
-    "
+                            className="absolute right-2 top-1/2 -translate-y-1/2
+                                w-4 h-4
+                                flex items-center justify-center"
                         >
                             <img
                                 src="/icons/search.svg"
@@ -80,8 +78,6 @@ const Header = () => {
                             />
                         </span>
                     </div>
-
-
                 </div>
             </div>
         </header>
