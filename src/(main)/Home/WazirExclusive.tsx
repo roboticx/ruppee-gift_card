@@ -35,7 +35,7 @@ const WazirExclusive: React.FC = () => {
     const visible = Math.floor(containerWidth / ITEM_WIDTH);
 
     // setVisibleItems(visible);
-    setMaxIndex(Math.max(categories.length - visible+1, 0));
+    setMaxIndex(Math.max(categories.length - visible + 1, 0));
   };
 
   useEffect(() => {

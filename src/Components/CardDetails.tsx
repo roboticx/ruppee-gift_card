@@ -47,8 +47,7 @@ const CardDetails = () => {
               rounded-xl
               shadow-xl
               overflow-hidden
-            "
-            style={{ backgroundImage: `url('/images/cards/banner.png')` }}
+              bg-[url(/images/cards/banner.png)]"
           ></div>
         </div>
 

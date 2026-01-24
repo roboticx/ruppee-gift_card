@@ -4,6 +4,7 @@ import RootLayout from '../layouts/RootLayout'
 import AuthLayout from '../layouts/AuthLayout'
 import CardDetails from '../Components/CardDetails'
 import StoreList from '../(main)/StoreList/StoreList'
+import Cart from '../(main)/Cart'
 
 const AppRoutes = () => {
     return (
@@ -14,7 +15,7 @@ const AppRoutes = () => {
                 <Route path={'/store-list/:categoryId'} element={<StoreList />} />
             </Route>
             <Route element={<AuthLayout />}>
-                {/* <Route path="/login" element={<Login />} /> */}
+                <Route path="/cart" element={<Cart />} />
             </Route>
         </Routes>
     )
