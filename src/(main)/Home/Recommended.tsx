@@ -33,7 +33,7 @@ const Recommended = () => {
 
     return (
         Object.entries(categories).map(([categoryName, items]) => (
-            <section className="px-4 pb-6" key={categoryName}>
+            <section className="px-4 pb-2 md:pb-6" key={categoryName}>
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-3xl font-semibold text-[#111]">
                         {categoryName}
@@ -52,7 +52,7 @@ const Recommended = () => {
                     </a>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-4 space-y-6 pt-3">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-10  space-y-2 md:space-y-6 pt-3">
                     {items.map((item) => (
                         <StoreComponent store={item} />
                     ))}

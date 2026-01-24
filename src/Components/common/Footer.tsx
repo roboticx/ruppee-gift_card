@@ -3,7 +3,7 @@ const Footer = () => {
         <footer className="bg-[#2b6574]  text-white text-[13px]">
             {/* CONTAINER */}
             <div className="flex justify-center">
-                <div className="w-350.5 px-5 ">
+                <div className="w-[1350px] px-5 ">
                     <div className="flex justify-between py-10">
                         <div className="w-[60%]">
                             <div className=" mt-1 flex items-center text-white text-[28px] font-medium tracking-[1px]">
@@ -139,7 +139,6 @@ const Footer = () => {
                     Wazirz © 2025. All rights reserved
                 </span>
             </div>
-            {/* BOTTOM */}
         </footer>
     );
 };

@@ -26,11 +26,10 @@ const StoreList = () => {
     ];
 
     return (
-        <section className="px-4 pb-6" >
-            <h3 className="text-3xl font-semibold text-[#111]">
+        <section className="px-4  pb-6" >
+            <h3 className="font-inter text-[36px] my-10 font-semibold leading-[150%] tracking-normal text-[#111]">
                 {storeName}
             </h3>
-
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-4 space-y-6 pt-3">
                 {storeList.map((item) => (
                     <StoreComponent store={item} />

@@ -3,7 +3,7 @@ import Card from './Card'
 const CardDetails = () => {
   return (
     <div className="flex justify-center px-4 sm:px-6 py-10">
-      <div className="w-full max-w-[350.5px] sm:max-w-[700px] lg:max-w-[1200px]">
+      <div className="w-full max-w-[350.5px] sm:max-w-[700px] lg:max-w-[1402px]">
 
         {/* Card Container */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 rounded-2xl bg-white py-6 md:py-8 px-4 md:px-8">
