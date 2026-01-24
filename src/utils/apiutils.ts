@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosResponse, AxiosError } from "axios";
-import { logout } from "../store/slices/authSlice";
 import { showToast } from "../Components/ToastProvider";
+import { logout } from "../store/slices/authSlice";
 
 let injectedStore: any = null;
 
