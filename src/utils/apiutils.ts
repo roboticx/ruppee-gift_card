@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosResponse, AxiosError } from "axios";
-import { showToast } from "../components/ToastProvideer";
 import { logout } from "../store/slices/authSlice";
+import { showToast } from "../Components/ToastProvider";
 
 let injectedStore: any = null;
 
@@ -9,34 +9,31 @@ export const attachStore = (store: any) => {
   injectedStore = store;
 };
 
-const api = axios.create(
-  {
-    baseURL: import.meta.env.VITE_API_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }
-);
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 api.interceptors.request.use(
   (config: any) => {
-    const token = typeof window !== "undefined"
-      ? localStorage.getItem("token")
-      : null;
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error: AxiosError) => Promise.reject(error)
+  (error: AxiosError) => Promise.reject(error),
 );
 
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: any) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 interface ApiRequestOptions {
@@ -47,11 +44,7 @@ interface ApiRequestOptions {
 
 const handleRequest = async <T>(
   requestFn: () => Promise<AxiosResponse<T>>,
-  {
-    toast,
-    showSuccess = true,
-    showError = true
-  }: ApiRequestOptions
+  { toast, showSuccess = true, showError = true }: ApiRequestOptions,
 ): Promise<T> => {
   try {
     const response: any = await requestFn();
@@ -59,16 +52,20 @@ const handleRequest = async <T>(
     if (showSuccess && toast) {
       showToast({
         type: "success",
-        message: response.data?.message ?? response.data?.data?.message ?? "Operation successful!",
+        message:
+          response.data?.message ??
+          response.data?.data?.message ??
+          "Operation successful!",
         duration: 3000,
         position: "top-right",
       });
     }
     return response.data;
-  }
-
-  catch (err: any) {
-    if (axios.isAxiosError(err) && (err.response?.status === 401 || err.response?.status === 403)) {
+  } catch (err: any) {
+    if (
+      axios.isAxiosError(err) &&
+      (err.response?.status === 401 || err.response?.status === 403)
+    ) {
       injectedStore?.dispatch(logout());
     }
 
@@ -79,7 +76,8 @@ const handleRequest = async <T>(
     if (showError && toast) {
       showToast({
         type: "error",
-        message: err?.response?.data?.message ?? err.message ?? "An error occurred",
+        message:
+          err?.response?.data?.message ?? err.message ?? "An error occurred",
         duration: 3000,
         position: "top-right",
       });
@@ -128,7 +126,7 @@ export const POST = ({
   handleRequest(() => api.post(url, data), {
     toast,
     showSuccess,
-    showError
+    showError,
   });
 
 export const PUT = ({
@@ -141,7 +139,7 @@ export const PUT = ({
   handleRequest(() => api.put(url, data), {
     toast,
     showSuccess,
-    showError
+    showError,
   });
 
 export const PATCH = ({
@@ -154,7 +152,7 @@ export const PATCH = ({
   handleRequest(() => api.patch(url, data), {
     toast,
     showSuccess,
-    showError
+    showError,
   });
 
 export const DELETE = ({

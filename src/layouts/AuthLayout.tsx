@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
-import Footer from '../components/common/Footer/Footer'
-import Header from '../components/common/Header/Header'
 import { useAppSelector } from "../store/store";
+import Header from '../Components/common/Header';
+import Footer from '../Components/common/Footer';
 
 const AuthLayout = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
