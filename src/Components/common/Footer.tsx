@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+
+    const navigate = useNavigate();
+
     return (
         <footer className="bg-[#2b6574]  text-white text-[13px]">
             {/* CONTAINER */}
             <div className="flex justify-center">
-                <div className="w-[1350px] px-5 ">
+                <div className="w-full md:w-340 px-5 ">
                     <div className="flex justify-between py-10">
                         <div className="w-[60%]">
                             <div className=" mt-1 flex items-center text-white text-[28px] font-medium tracking-[1px]">
@@ -22,7 +27,8 @@ const Footer = () => {
                                     className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center"
+                                        inline-flex items-center cursor-pointer"
+                                    onClick={() => navigate('/')}
                                 >
                                     About Us
                                 </li>
@@ -30,7 +36,8 @@ const Footer = () => {
                                     className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center"
+                                        inline-flex items-center cursor-pointer"
+                                    onClick={() => navigate('/')}
                                 >
                                     Terms and Condition
                                 </li>
@@ -38,7 +45,8 @@ const Footer = () => {
                                     className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center"
+                                        inline-flex items-center cursor-pointer"
+                                    onClick={() => navigate('/')}
                                 >
                                     Privacy Policy
                                 </li>
@@ -50,7 +58,8 @@ const Footer = () => {
                                     className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center"
+                                        inline-flex items-center cursor-pointer"
+                                    onClick={() => navigate('/')}
                                 >
                                     Shipping Policy
                                 </li>
@@ -58,7 +67,8 @@ const Footer = () => {
                                     className="font-inter 
                                         text-[16px] leading-[150%]
                                         text-white
-                                        inline-flex items-center"
+                                        inline-flex items-center cursor-pointer"
+                                    onClick={() => navigate('/')}
                                 >
                                     Cancellation and Refund Policy
                                 </li>
@@ -79,9 +89,10 @@ const Footer = () => {
                                         inline-flex items-center
                                         font-inter font-medium
                                         text-[13px] leading-[150%]
-                                        text-white"
+                                        text-white cursor-pointer"
+                                    onClick={() => navigate('tel:7706063838')}
                                 >
-                                    8860262227
+                                    7706063838
                                 </span>
 
                             </div>
@@ -96,9 +107,10 @@ const Footer = () => {
                                         inline-flex items-center
                                         font-inter font-medium
                                         text-[13px] leading-[150%]
-                                        text-white"
+                                        text-white cursor-pointer"
+                                    onClick={() => navigate('mailto:roboticx@gmail.com')}
                                 >
-                                    wazirz@wazirzsmindiapvtltd.com
+                                    roboticx@gmail.com
                                 </span>
 
                             </div>

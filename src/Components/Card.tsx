@@ -5,7 +5,7 @@ const Card = () => {
 
   return (
 
-    <div className="flex flex-wrap py-8 px-0 md:px-8">
+    <div className="flex flex-wrap py-8 px-0">
       <div
         className="w-108.75 h-51.75 rounded-2xl border border-[#2B6777] bg-white
           shadow-[0_0_0_2px_rgba(43,103,119,0.22),0_8px_20px_rgba(43,103,119,0.32)]

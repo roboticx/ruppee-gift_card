@@ -7,7 +7,7 @@ const StoreComponent = ({ store }: any) => {
 
     return (
         <div className="w-full flex justify-center">
-            <div className="w-[1402px]">
+            <div className="w-350.5">
                 <div className="relative mb-4 w-full max-w-sm sm:max-w-md aspect-[1/0.8] rounded-[15px] bg-white border border-[#e9e9e9] flex items-center justify-center shadow-lg">
                     <span
                         className="
