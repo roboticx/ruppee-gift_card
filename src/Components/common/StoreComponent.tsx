@@ -1,0 +1,52 @@
+import { GrAdd } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
+
+const StoreComponent = ({ store }: any) => {
+
+    const navigate = useNavigate();
+
+    return (
+        <div className="relative mb-0 aspect-[1/0.8] rounded-[15px] bg-white border border-[#e9e9e9] flex items-center justify-center shadow-lg">
+            {/* DISCOUNT BADGE */}
+            <span
+                className="absolute
+                    -top-5 -right-6.25
+                    w-17 h-17
+                    text-white text-[20px] font-semibold
+                    flex items-center justify-center
+                    shadow-[0_6px_10px_rgba(0,0,0,0.15)]"
+                style={{
+                    background:
+                        "linear-gradient(161.5deg, #F82D2D 37.3%, #DA3B75 84.55%)",
+                    clipPath:
+                        "polygon(50% 0%,79% 10%,100% 35%,100% 65%,79% 90%,50% 100%,21% 90%,0% 65%,0% 35%,21% 10%)",
+                }}
+            >
+                {store.discount}%
+            </span>
+
+            {/* IMAGE */}
+            <img
+                src={`/images/Recommanded/${store.imgUrl}`}
+                alt={store.name}
+                className="w-full h-full object-contain rounded-[15px]"
+            />
+
+            {/* ADD BUTTON */}
+            <button
+                className="absolute bottom-3 right-3
+                    w-9 h-9
+                    rounded-sm
+                    border border-[#00EAFF]
+                    text-[#00EAFF]
+                   bg-[#00EAFF14]
+                    flex items-center justify-center"
+                onClick={() => navigate('/card-details')}
+            >
+                <GrAdd />
+            </button>
+        </div>
+    )
+}
+
+export default StoreComponent
