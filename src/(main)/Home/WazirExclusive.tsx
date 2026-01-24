@@ -56,67 +56,79 @@ const WazirExclusive: React.FC = () => {
   };
 
   return (
-    <section className="py-12">
+    <section className=" px-5 sm:px-0 py-12">
 
       {/* HEADER */}
       <div className="flex items-center justify-between pb-4">
-        <button
-          onClick={prev}
-          disabled={currentIndex === 0}
-          className="
-            w-8 h-8
-            rounded-lg
-            border border-[#00EAFF]
-            text-[#00EAFF]
-            bg-white
-            flex items-center justify-center
-            text-[18px]
-            shadow-[0px_0px_6px_1px_#00EAFF40]
-            disabled:opacity-40
-            disabled:cursor-not-allowed
-          "
-        >
-          <FaChevronLeft />
-        </button>
+  <button
+  onClick={prev}
+  disabled={currentIndex === 0}
+  className="
+    w-7 h-7 sm:w-8 sm:h-8
+    rounded-md sm:rounded-lg
+    border border-[#00EAFF]
+    text-[#00EAFF]
+    bg-white
+    flex items-center justify-center
+    text-[14px] sm:text-[18px]
+    shadow-[0px_0px_6px_1px_#00EAFF40]
+    disabled:opacity-40
+    disabled:cursor-not-allowed
+  "
+>
+  <FaChevronLeft className="text-[12px] sm:text-[16px]" />
+</button>
 
-        <h2 className="text-[22px] font-semibold leading-[120%] text-center">
-          Wazirz Exclusive
-        </h2>
+
+       <h2
+  className="
+    text-[18px] sm:text-[22px]
+    font-semibold
+    leading-[120%]
+    text-center
+    text-gray-900
+  "
+>
+  Wazirz Exclusive
+</h2>
+
 
         <div className="flex items-center gap-2">
-          <button
-            className="
-              h-8 w-23.5
-              px-4
-              rounded-lg
-              border border-[#00C8DA]
-              text-[#00EAFF]
-              bg-white
-              text-[14px] font-medium
-              shadow-[0px_0px_6px_1px_#00EAFF40]
-            "
-          >
-            Category
-          </button>
+     <button
+  className="
+    h-8 w-[94px]
+    px-4
+    rounded-lg
+    border border-[#00C8DA]
+    bg-white
+    text-[#00EAFF]
+    text-[14px] font-medium
+    shadow-[0px_0px_6px_1px_#00EAFF40]
+    flex items-center justify-center
+  "
+>
+  Category
+</button>
 
-          <button
-            onClick={next}
-            disabled={currentIndex >= maxIndex}
-            className="
-              w-8 h-8
-              rounded-lg
-              border border-[#00EAFF]
-              text-[#00EAFF]
-              bg-white
-              flex items-center justify-center
-              text-[18px]
-              shadow-[0px_0px_6px_1px_#00EAFF40]
-              disabled:opacity-40
-              disabled:cursor-not-allowed
-            "
-          >
-            <FaChevronRight />
-          </button>
+       <button
+  onClick={next}
+  disabled={currentIndex >= maxIndex}
+  className="
+    w-7 h-7 sm:w-8 sm:h-8
+    rounded-md sm:rounded-lg
+    border border-[#00EAFF]
+    text-[#00EAFF]
+    bg-white
+    flex items-center justify-center
+    text-[14px] sm:text-[18px]
+    shadow-[0px_0px_6px_1px_#00EAFF40]
+    disabled:opacity-40
+    disabled:cursor-not-allowed
+  "
+>
+  <FaChevronRight className="text-[12px] sm:text-[16px]" />
+</button>
+
         </div>
       </div>
 
@@ -128,22 +140,23 @@ const WazirExclusive: React.FC = () => {
           }}
         >
           {categories.map((item: Category, index: number) => (
-            <div
-              key={index}
-              className="w-35 shrink-0 text-center"
-            >
-              <div className="w-30 h-30 rounded-full overflow-hidden mx-auto">
-                <img
-                  src={`/images/wazirz-exclusive/${item.imageUrl}`}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+           <div
+  key={index}
+  className="w-28 sm:w-35 shrink-0 text-center"
+>
+  <div className="w-24 h-24 sm:w-30 sm:h-30 rounded-full overflow-hidden mx-auto">
+    <img
+      src={`/images/wazirz-exclusive/${item.imageUrl}`}
+      alt={item.name}
+      className="w-full h-full object-cover"
+    />
+  </div>
 
-              <p className="mt-3 text-[16px] font-medium text-[#111] leading-[120%]">
-                {item.name}
-              </p>
-            </div>
+  <p className="mt-2 sm:mt-3 text-[14px] sm:text-[16px] font-medium text-[#111] leading-[120%]">
+    {item.name}
+  </p>
+</div>
+
           ))}
         </div>
       </div>
