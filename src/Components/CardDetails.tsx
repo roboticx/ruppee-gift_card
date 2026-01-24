@@ -3,13 +3,13 @@ import Card from './Card'
 const CardDetails = () => {
   return (
     <div className="flex justify-center px-4 sm:px-6 py-10">
-      <div className="w-full max-w-[350.5px] sm:max-w-[700px] lg:max-w-[1200px]">
+      <div className="w-full max-w-[350.5px] sm:max-w-175 lg:max-w-300">
 
         {/* Card Container */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 rounded-2xl bg-white py-6 md:py-8 px-4 md:px-8">
-          
+
           {/* Image Container */}
-          <div className="w-full md:w-[230px] md:h-[230px] flex items-center justify-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+          <div className="w-full md:w-57.5 md:h-57.5 flex items-center justify-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
             <img
               src={'/images/cards/sct.jpg'}
               alt="Blink It"
@@ -42,7 +42,7 @@ const CardDetails = () => {
           <div
             className="
               w-full
-              aspect-[4/1] sm:aspect-[5/1] md:aspect-[6/1]
+              aspect-4/1 sm:aspect-5/1 md:aspect-6/1
               bg-center bg-cover bg-no-repeat
               rounded-xl
               shadow-xl
@@ -53,7 +53,12 @@ const CardDetails = () => {
 
         {/* Additional Card Component */}
         <div className="mt-6">
-          <Card />
+          <div className="w-full"><p className="font-inter font-semibold text-[20px] px-8 py-3 leading-7.5">
+            Cards by details
+          </p>
+            <hr className="border-t border-slate-400/60" />
+            <Card />
+          </div>
         </div>
       </div>
     </div>
