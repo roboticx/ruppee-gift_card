@@ -6,7 +6,7 @@ const Card = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // modal state
 
   return (
-    <div className="w-full">
+    <div className=" w-[1430px] px-12">
       <p className="font-inter font-semibold text-[20px] px-8 py-3 leading-[30px]">
         Cards by details
       </p>

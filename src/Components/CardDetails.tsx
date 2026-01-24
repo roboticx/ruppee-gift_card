@@ -2,8 +2,8 @@ import Card from './Card'
 
 const CardDetails = () => {
   return (
-    <div className="flex justify-center  py-10">
-      <div className="w-full max-w-350.5 ">
+    <div className="flex justify-center px-2  py-10">
+      <div className="w-full  max-w-350.5 ">
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 rounded-2xl bg-white py-6 md:py-8 px-4 md:px-8">
           {/* Image Container */}
           <div className="w-full md:w-57.5 md:h-57.5 flex items-center justify-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
@@ -35,9 +35,10 @@ const CardDetails = () => {
         </div>
 
         {/*  */}
-        <div
+<div className='px-10'>
+          <div
           className="
-            w-full
+            w-[1350px]
             h-30
             sm:h-35
             md:h-40.25
@@ -51,6 +52,7 @@ const CardDetails = () => {
           style={{ backgroundImage: `url(${'/images/cards/banner.png'})` }}
         >
         </div>
+</div>
 
         {/*  */}
         <Card />
