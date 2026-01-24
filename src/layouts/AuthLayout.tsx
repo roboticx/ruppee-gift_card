@@ -9,7 +9,7 @@ const AuthLayout = () => {
     return (
         <>
             <Header />
-            <main className="min-h-screen">
+            <main className="min-h-[65.8vh] max-w-350.5 mx-auto">
                 <Outlet />
             </main>
             <Footer />
