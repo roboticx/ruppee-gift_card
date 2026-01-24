@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from '../(main)/Home/Home'
 import RootLayout from '../layouts/RootLayout'
 import AuthLayout from '../layouts/AuthLayout'
-import CardDetails from '../Components/CardDetails'
+import CardDetails from '../(main)/CardDetails'
 import StoreList from '../(main)/StoreList/StoreList'
 import Cart from '../(main)/Cart'
 

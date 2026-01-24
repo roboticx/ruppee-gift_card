@@ -45,7 +45,7 @@ const Header = () => {
                     {/* CENTER LOGO */}
                     <div
                         className="absolute left-1/2 -translate-x-1/2 flex items-center text-white text-[28px] font-medium tracking-[1px] cursor-pointer"
-                        onClick={() => navigate('/cart')}
+                        onClick={() => navigate('/')}
                     >
                         <img
                             src="/images/rupee_sign.png"
@@ -55,7 +55,7 @@ const Header = () => {
 
                         <span className="ml-1.75">
                             GIFT
-                            </span>
+                        </span>
                     </div>
 
                     {/* RIGHT */}
