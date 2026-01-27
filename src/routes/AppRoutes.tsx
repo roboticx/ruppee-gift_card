@@ -6,6 +6,7 @@ import CardDetails from '../(main)/CardDetails'
 import StoreList from '../(main)/StoreList/StoreList'
 import Cart from '../(main)/Cart'
 import Checkout from '../(main)/Checkout'
+import Failed from '../(main)/Failed'
 
 const AppRoutes = () => {
     return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             </Route>
             <Route element={<AuthLayout />}>
                 <Route path={'/checkout'} element={<Checkout />} />
+                <Route path={'/failed'} element={<Failed />} />
             </Route>
         </Routes>
     )

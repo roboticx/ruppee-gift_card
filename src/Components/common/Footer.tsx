@@ -1,158 +1,117 @@
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  return (
+    <footer className="bg-[#2b6574] text-white text-[13px] w-full overflow-x-hidden">
+      <div className="flex justify-center px-4">
+        <div className="w-full md:w-340">
 
-    return (
-        <footer className="bg-[#2b6574]  text-white text-[13px]">
-            {/* CONTAINER */}
-            <div className="flex justify-center">
-                <div className="w-full md:w-340 px-5 ">
-                    <div className="flex justify-between py-10">
-                        <div className="w-[60%]">
-                            <div className=" mt-1 flex items-center text-white text-[28px] font-medium tracking-[1px]">
-                                <img
-                                    src="/images/rupee_sign.png"
-                                    alt=""
-                                    className="w-8.75 h-8.75 -mt-2.25 -mr-3.75"
-                                />
-                                <span className="ml-1.75">GIFT</span>
-                            </div>
-                        </div>
+          {/* TOP SECTION */}
+          <div className="flex flex-col md:flex-row justify-between py-10 gap-8">
 
-                        <div className="w-[20%]">
-                            <ul className="flex flex-col gap-2">
-                                <li
-                                    className="font-inter 
-                                        text-[16px] leading-[150%]
-                                        text-white
-                                        inline-flex items-center cursor-pointer"
-                                    onClick={() => navigate('/')}
-                                >
-                                    About Us
-                                </li>
-                                <li
-                                    className="font-inter 
-                                        text-[16px] leading-[150%]
-                                        text-white
-                                        inline-flex items-center cursor-pointer"
-                                    onClick={() => navigate('/')}
-                                >
-                                    Terms and Condition
-                                </li>
-                                <li
-                                    className="font-inter 
-                                        text-[16px] leading-[150%]
-                                        text-white
-                                        inline-flex items-center cursor-pointer"
-                                    onClick={() => navigate('/')}
-                                >
-                                    Privacy Policy
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="w-[20%]">
-                            <ul className="flex flex-col gap-2">
-                                <li
-                                    className="font-inter 
-                                        text-[16px] leading-[150%]
-                                        text-white
-                                        inline-flex items-center cursor-pointer"
-                                    onClick={() => navigate('/')}
-                                >
-                                    Shipping Policy
-                                </li>
-                                <li
-                                    className="font-inter 
-                                        text-[16px] leading-[150%]
-                                        text-white
-                                        inline-flex items-center cursor-pointer"
-                                    onClick={() => navigate('/')}
-                                >
-                                    Cancellation and Refund Policy
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-between pb-10">
-                        <div className="w-[60%]">
-                            <div className=" mt-1 flex items-center text-white text-[28px] font-medium tracking-[1px]">
-                                <img
-                                    src="/icons/tele.svg"
-                                    alt="telegram"
-                                    className="w-[12.67px] h-[12.67px]"
-                                />
-                                <span
-                                    className="ml-1.75
-                                        inline-flex items-center
-                                        font-inter font-medium
-                                        text-[13px] leading-[150%]
-                                        text-white cursor-pointer"
-                                    onClick={() => navigate('tel:7706063838')}
-                                >
-                                    7706063838
-                                </span>
-
-                            </div>
-                            <div className=" mt-1 flex items-center text-white text-[28px] font-medium tracking-[1px]">
-                                <img
-                                    src="/icons/mail.svg"
-                                    alt="telegram"
-                                    className="w-[12.67px] h-[12.67px]"
-                                />
-                                <span
-                                    className="ml-1.75
-                                        inline-flex items-center
-                                        font-inter font-medium
-                                        text-[13px] leading-[150%]
-                                        text-white cursor-pointer"
-                                    onClick={() => navigate('mailto:roboticx@gmail.com')}
-                                >
-                                    roboticx@gmail.com
-                                </span>
-
-                            </div>
-                        </div>
-                        <div className="w-[40%]">
-                            <div className=" mt-1 flex items-center text-white text-[28px]">
-                                <img
-                                    src="/icons/pin.svg"
-                                    alt="telegram"
-                                    className="w-[15.67px] h-[15.67px]"
-                                />
-                                <span
-                                    className="ml-1.75
-                                        inline-flex items-center
-                                        font-inter font-medium
-                                        text-[12px] leading-[150%]
-                                        text-white"
-                                >
-                                    3097, FLAT NO 2 LEFT SIDE, 2ND FLOOR BACK SIDE GALI NO 34,
-                                    TUGHLAKABAD EXTN, Delhi, India - 110019
-                                </span>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            {/* LOGO */}
+            <div className="w-full md:w-[60%]">
+              <div className="flex items-center text-[28px] font-medium tracking-[1px]">
+                <img
+                  src="/images/rupee_sign.png"
+                  alt=""
+                  className="w-8 h-8 -mt-2 -mr-3"
+                />
+                <span className="ml-2">GIFT</span>
+              </div>
             </div>
 
-            <hr />
-            <div className="flex py-5 justify-center">
+            {/* LINKS 1 */}
+            <div className="w-full md:w-[20%]">
+              <ul className="flex flex-col gap-2">
+                {["About Us", "Terms and Condition", "Privacy Policy"].map(
+                  (item, i) => (
+                    <li
+                      key={i}
+                      className="text-[16px] leading-[150%] cursor-pointer"
+                      onClick={() => navigate("/")}
+                    >
+                      {item}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            {/* LINKS 2 */}
+            <div className="w-full md:w-[20%]">
+              <ul className="flex flex-col gap-2">
+                {["Shipping Policy", "Cancellation and Refund Policy"].map(
+                  (item, i) => (
+                    <li
+                      key={i}
+                      className="text-[16px] leading-[150%] cursor-pointer"
+                      onClick={() => navigate("/")}
+                    >
+                      {item}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          </div>
+
+          {/* CONTACT SECTION */}
+          <div className="flex flex-col md:flex-row justify-between pb-10 gap-8">
+
+            {/* CONTACT */}
+            <div className="w-full md:w-[60%] flex flex-col gap-3">
+
+              <div className="flex items-center gap-2">
+                <img src="/icons/tele.svg" className="w-3 h-3" />
                 <span
-                    className="font-inter font-medium
-                        text-[16px] leading-[150%]
-                        text-white
-                        inline-flex items-center"
+                  className="text-[13px] cursor-pointer"
+                  onClick={() => (window.location.href = "tel:7706063838")}
                 >
-                    Wazirz © 2025. All rights reserved
+                  7706063838
                 </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <img src="/icons/mail.svg" className="w-3 h-3" />
+                <span
+                  className="text-[13px] cursor-pointer break-all"
+                  onClick={() =>
+                    (window.location.href = "mailto:roboticx@gmail.com")
+                  }
+                >
+                  roboticx@gmail.com
+                </span>
+              </div>
             </div>
-        </footer>
-    );
+
+            {/* ADDRESS */}
+            <div className="w-full md:w-[40%]">
+              <div className="flex items-start gap-2">
+                <img src="/icons/pin.svg" className="w-4 h-4 mt-1" />
+                <span className="text-[12px] leading-[150%] break-words">
+                  3097, FLAT NO 2 LEFT SIDE, 2ND FLOOR BACK SIDE GALI NO 34,
+                  TUGHLAKABAD EXTN, Delhi, India - 110019
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER BOTTOM */}
+      <hr className="opacity-30" />
+
+      <div className="flex justify-center py-5 px-4 text-center">
+        <span className="text-[14px] md:text-[16px]">
+          Wazirz © 2025. All rights reserved
+        </span>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
