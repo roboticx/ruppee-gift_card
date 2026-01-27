@@ -1,22 +1,22 @@
-const Checkout = () => {
+const Failed = () => {
     return (
         <div className='flex justify-center py-5'>
             <div className=' w-full'>
-                <div className="flex justify-center px-3">
+                <div className="flex justify-center px-3 overflow-hidden  ">
                     <div
-                        className="w-full max-w-[773px] border rounded-lg mb-5 overflow-hidden relative flex">
+                        className="w-full max-w-[773px] border-2 border-[#c9c8c8]/50 rounded-xl shadow-lg  mb-5 overflow-hidden relative flex">
                         <div className="w-full h-12 sm:h-16 flex items-center px-3 sm:px-4">
                             <p className="font-sans font-medium text-[14px] sm:text-[18px] leading-[100%] break-all">
                                 Txn ID : 94545126545655
                             </p>
                         </div>
                         <div
-                            className="w-[140px] sm:w-[215px] h-12 sm:h-16 rounded-full absolute -right-4 sm:-right-7 flex justify-center items-center gap-1 sm:gap-2
-                            bg-[#2B6777] ">
-                            <span className="font-sans font-semibold text-white text-[13px] sm:text-[16px] leading-[100%]">
-                                Saved 76
+                            className="w-[140px] sm:w-[215px] h-72  absolute top-1/2 rotate-[-40deg] -translate-y-1/2 -right-5 shadow-black shadow-xl flex justify-center items-center gap-1 sm:gap-2
+                            bg-[#D22E2D] ">
+                            <span className="font-sans font-semibold text-white text-[13px] rotate-[40deg] flex items-center gap-2 justify-center sm:text-[16px] leading-[100%]">
+                                Failed
+                                <img src="/images/r.png" alt="" className="h-3 sm:h-4" />
                             </span>
-                            <img src="/images/r.png" alt="" className="h-3 sm:h-4" />
                         </div>
                     </div>
                 </div>
@@ -146,4 +146,5 @@ const Checkout = () => {
         </div>
     )
 }
-export default Checkout
+
+export default Failed
