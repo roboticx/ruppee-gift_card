@@ -14,8 +14,30 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
     const [isOtpSend, setIsOtpSended] = useState(false);
     const [mobileNumber, setMobileNumber] = useState('');
     const [otp, setOtp] = useState('');
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [canResend, setCanResend] = useState(true);
 
     const dispatch = useAppDispatch();
+
+    const startOtpTimer = (
+        setTimeLeft: React.Dispatch<React.SetStateAction<number>>,
+        setCanResend: React.Dispatch<React.SetStateAction<boolean>>
+    ) => {
+        setCanResend(false);
+        setTimeLeft(60);
+
+        const interval = setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    setCanResend(true);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
+
 
     const sendOtp = async () => {
         if (loading) return;
@@ -23,13 +45,14 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
 
         try {
             const res = await POST({
-                url: 'auth/login',
+                url: 'auth/send-otp',
                 data: { mobileNumber: mobileNumber },
                 toast: true
             });
 
-            console.log(res);
-            setIsOtpSended(true);
+            startOtpTimer(setTimeLeft, setCanResend);
+
+            res.status == "SUCCESS" ? setIsOtpSended(true) : dispatch(setLoginModal(false));
         }
         catch (e: any) { }
         finally {
@@ -43,21 +66,60 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
 
         try {
             const res = await POST({
-                url: 'auth/login',
+                url: 'auth/verify-otp',
                 data: { mobileNumber, otp },
                 toast: true
             });
 
-            setIsOtpSended(false);
+            if (res.status === 'SUCCESS') {
+                setIsOtpSended(false);
 
-            localStorage.setItem("token", res.data.token);
-            dispatch(loginSuccess(res.data.token));
+                localStorage.setItem("token", res.data.token);
+                dispatch(loginSuccess(res.data.token));
+            }
         }
         catch (e: any) { }
         finally {
+            dispatch(setLoginModal(false))
             setLoading(false);
         }
     };
+
+    const resendOtp = async () => {
+        if (loading) return;
+        setLoading(true);
+
+        try {
+            const res = await POST({
+                url: 'auth/resend-otp',
+                data: { mobileNumber },
+                toast: true
+            });
+
+            if (res.status === 'SUCCESS') {
+                startOtpTimer(setTimeLeft, setCanResend);
+            }
+        }
+        catch (e: any) { }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        else {
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        };
+    }, [isOpen]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -167,7 +229,22 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
                         </p>
 
                         <p className="text-[18px] text-black/90 leading-relaxed mb-8 font-normal">
-                            Don’t receive it yet? Retry again in 18s.
+                            Don’t receive it yet? {" "}
+                            {canResend ? (
+                                <button
+                                    className="underline"
+                                    onClick={resendOtp}
+                                >
+                                    Resend OTP
+                                </button>
+                            ) : (
+                                <span>
+                                    Retry again in {" "}
+                                    <span className="text-red-500">
+                                        {timeLeft}s
+                                    </span>
+                                </span>
+                            )}
                         </p>
 
                         {/* MOBILE NUMBER */}
