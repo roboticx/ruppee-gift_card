@@ -13,11 +13,11 @@ const AppRoutes = () => {
             <Route element={<RootLayout />}>
                 <Route path={'/'} element={<Home />} />
                 <Route path={'/card-details'} element={<CardDetails />} />
-                <Route path={'/checkout'} element={<Checkout />} />
                 <Route path={'/store-list/:categoryId'} element={<StoreList />} />
+                <Route path="/cart" element={<Cart />} />
             </Route>
             <Route element={<AuthLayout />}>
-                <Route path="/cart" element={<Cart />} />
+                <Route path={'/checkout'} element={<Checkout />} />
             </Route>
         </Routes>
     )
