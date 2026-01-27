@@ -38,7 +38,7 @@ const Cart = () => {
                         alt="gift banner"
                         className="absolute inset-0 h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-pink-100/40" />
+                    <div className="absolute inset-0 bg-pink-100/50" />
 
                     <div className="relative flex items-center gap-3 px-4 h-full">
                         <input
@@ -46,7 +46,7 @@ const Cart = () => {
                             className="h-8 w-8 rounded border-[#2B6777] accent-[#2B6777] "
                         />
 
-                        <span className="text-md font-medium text-gray-800">
+                        <span className="text-2xl font-semibold text-gray-800">
                             This is Gift
                         </span>
 
