@@ -213,23 +213,7 @@ const Cart = () => {
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="font-sen text-[24px] font-semibold leading-[120%] tracking-normal align-middle text-gray-800">
                         In Your Cart
-                    </h2><button className="
-                                    w-[87.38px] h-9
-                                    rounded-lg
-                                    bg-[#2B6777]
-                                    font-sen
-                                    text-[14px]
-                                    font-normal
-                                    leading-[120%]
-                                    tracking-normal
-                                    text-white
-                                    flex items-center justify-center
-                                    text-center
-                                    shadow-[0px_0px_6px_1px_#00EAFF40]
-                                "
-                    >
-                        Add Cart
-                    </button>
+                    </h2>
                 </div>
 
                 <CardList cardsData={cardData} />

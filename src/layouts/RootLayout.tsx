@@ -1,8 +1,22 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../Components/common/Header";
 import Footer from "../Components/common/Footer";
+import LoginComponent from "../(main)/Login/LoginComponent";
+import { useSelector } from "react-redux";
+import { useAppDispatch, type RootState } from "../store/store";
+import { useEffect } from "react";
+import { setLoginModal } from "../store/slices/authSlice";
 
 const RootLayout = () => {
+
+    const isLoginOpen = useSelector((state: RootState) => state.auth.isLoginModalOpen);
+
+    const dispatch = useAppDispatch();
+    const location = useLocation();
+
+    useEffect(() => {
+        dispatch(setLoginModal(false));
+    }, [location.pathname])
 
     return (
         <>
@@ -11,6 +25,7 @@ const RootLayout = () => {
                 <Outlet />
             </main>
             <Footer />
+            {isLoginOpen && <LoginComponent isOpen={isLoginOpen} />}
         </>
     );
 };
