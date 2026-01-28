@@ -7,27 +7,24 @@ const Cart = () => {
     const cardData = [
         {
             amount: 500,
-            id: '3',
+            id: 3,
             imgUrl: '/images/cards/rs.png',
-            cardCount: 2,
             storeImg: "/images/cards/bklt.jpg",
         },
         {
-            amount: 500,
-            id: '4',
+            amount: 1500,
+            id: 4,
             imgUrl: '/images/cards/rs.png',
-            cardCount: 2,
             storeImg: "/images/cards/bklt.jpg",
         },
         {
-            amount: 500,
-            id: '5',
+            amount: 2000,
+            id: 5,
             imgUrl: '/images/cards/rs.png',
-            cardCount: 2,
             storeImg: "/images/cards/bklt.jpg",
         },
     ];
-
+    
     return (
         <div className="w-full bg-white px-3">
             {/* Gift Banner */}

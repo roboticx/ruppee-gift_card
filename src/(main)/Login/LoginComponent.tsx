@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 import { POST } from "../../utils/apiutils";
 import { useAppDispatch } from "../../store/store";
-import { loginSuccess, setLoginModal } from "../../store/slices/authSlice";
+import { loginSuccess, setLoginModal, setUser } from "../../store/slices/authSlice";
 
 interface Props {
     isOpen: boolean;
@@ -37,7 +37,6 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
             });
         }, 1000);
     };
-
 
     const sendOtp = async () => {
         if (loading) return;
@@ -75,7 +74,9 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
                 setIsOtpSended(false);
 
                 localStorage.setItem("token", res.data.token);
+                localStorage.setItem("user", JSON.stringify(res.data.user));
                 dispatch(loginSuccess(res.data.token));
+                dispatch(setUser(res.data.user));
             }
         }
         catch (e: any) { }
