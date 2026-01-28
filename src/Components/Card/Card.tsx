@@ -1,10 +1,29 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useAppDispatch, type RootState } from "../../store/store";
+import { addToCart, decreaseQuantity, getQuantityById, increaseQuantity } from "../../store/slices/cartSlice";
+import { useSelector } from "react-redux";
 
 const Card = ({ cardData }: any) => {
-    const [count, setCount] = useState<number>(0);
+    // const [count, setCount] = useState<number>(0);
+
+    const count = useSelector((state: RootState) => getQuantityById(state.cart.items, cardData.id));
+
+    const dispatch = useAppDispatch();
+
+    const addToCartFn = (card: any) => {
+        const data = {
+            id: card.id,
+            quantity: 1,
+            image: card?.storeImg
+        };
+
+        dispatch(addToCart(data));
+    }
 
     return (
-        <div className={`flex flex-wrap 
+        <div
+            className={`
+                flex flex-wrap 
                 bg-cover bg-center bg-no-repeat
                 w-full h-51.75 
                 rounded-2xl 
@@ -36,10 +55,9 @@ const Card = ({ cardData }: any) => {
                 </div>
 
                 {
-                    (count > 0) ?
-                        (
+                    (count > 0)
+                        ? (
                             <>
-
                                 <div className="flex items-center justify-center gap-1">
                                     <span className="font-inter font-normal text-[24px] leading-9 text-[#2B6777]">
                                         <span className={count > 1 ? `line-through` : ''}>
@@ -52,10 +70,11 @@ const Card = ({ cardData }: any) => {
 
                                     <img src={cardData.imgUrl} alt="" className="h-5.5" />
                                 </div>
+
                                 <div className="flex items-center justify-between">
 
                                     <button
-                                        onClick={() => setCount(prev => Math.max(prev - 1, 0))}
+                                        onClick={() => dispatch(decreaseQuantity(cardData?.id))}
                                         disabled={count == 0}
                                     >
                                         <img
@@ -72,12 +91,11 @@ const Card = ({ cardData }: any) => {
                                     }
 
                                     <button
-                                        onClick={() => setCount(prev => prev + 1)}
+                                        onClick={() => dispatch(increaseQuantity(cardData?.id))}
                                     >
                                         <img src={"/icons/plus.svg"} alt="" className="w-8 h-8" />
                                     </button>
                                 </div>
-
                             </>
                         )
                         : (
@@ -87,17 +105,19 @@ const Card = ({ cardData }: any) => {
                                         <span className={count > 1 ? `line-through` : ''}>
                                             {cardData.amount} {''}
                                         </span>
+
                                         {(count > 1) &&
                                             (cardData.amount * count)
                                         }
                                     </span>
 
                                     <img src={cardData.imgUrl} alt="" className="h-5.5" />
-
                                 </div>
 
-                                <button className="border px-3 py-2 rounded-lg bg-[#2B6777] text-white font-bold"
-                                    onClick={() => setCount(1)}>
+                                <button
+                                    className="border px-3 py-2 rounded-lg bg-[#2B6777] text-white font-bold"
+                                    onClick={() => addToCartFn(cardData)}
+                                >
                                     Add To Cart
                                 </button>
                             </>
@@ -105,7 +125,7 @@ const Card = ({ cardData }: any) => {
                 }
 
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -1,10 +1,6 @@
 import { useParams } from "react-router-dom";
 import StoreComponent from "../../Components/common/StoreComponent";
 
-
-
-
-
 const StoreList = () => {
 
     const params = useParams();
@@ -30,6 +26,7 @@ const StoreList = () => {
             <h3 className="font-inter text-[36px] my-10 font-semibold leading-[150%] tracking-normal text-[#111]">
                 {storeName}
             </h3>
+
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-4 space-y-6 pt-3">
                 {storeList.map((item) => (
                     <StoreComponent store={item} />
