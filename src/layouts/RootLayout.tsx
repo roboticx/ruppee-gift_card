@@ -5,11 +5,14 @@ import LoginComponent from "../(main)/Login/LoginComponent";
 import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../store/store";
 import { useEffect } from "react";
+import { setLoginModal } from "../store/slices/authSlice";
+import SignUpComponent from "../(main)/SignUp/Signup";
 import { getAuthRedux, setLoginModal } from "../store/slices/authSlice";
 
 const RootLayout = () => {
 
     const isLoginOpen = useSelector((state: RootState) => state.auth.isLoginModalOpen);
+    const isSignupOpen = useSelector((state: RootState) => state.auth.isSignupModalOpen);
 
     const dispatch = useAppDispatch();
     const location = useLocation();
@@ -27,7 +30,9 @@ const RootLayout = () => {
             </main>
             <Footer />
             {isLoginOpen && <LoginComponent isOpen={isLoginOpen} />}
+            {isSignupOpen && <SignUpComponent isOpen={isSignupOpen} />}
         </>
+        
     );
 };
 

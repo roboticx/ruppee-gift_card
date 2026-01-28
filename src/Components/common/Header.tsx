@@ -1,6 +1,8 @@
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { setLoginModal } from "../../store/slices/authSlice";
+import { setSigninModal } from "../../store/slices/authSlice";
 import { useAppDispatch, type RootState } from "../../store/store";
 import { logout, setLoginModal } from "../../store/slices/authSlice";
 import { useSelector } from "react-redux";
