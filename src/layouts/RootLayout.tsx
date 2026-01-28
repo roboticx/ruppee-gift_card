@@ -7,6 +7,7 @@ import { useAppDispatch, type RootState } from "../store/store";
 import { useEffect } from "react";
 import { setLoginModal } from "../store/slices/authSlice";
 import SignUpComponent from "../(main)/SignUp/Signup";
+import { getAuthRedux, setLoginModal } from "../store/slices/authSlice";
 
 const RootLayout = () => {
 
@@ -17,6 +18,7 @@ const RootLayout = () => {
     const location = useLocation();
 
     useEffect(() => {
+        dispatch(getAuthRedux());
         dispatch(setLoginModal(false));
     }, [location.pathname])
 

@@ -1,14 +1,17 @@
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/store";
 import { setLoginModal } from "../../store/slices/authSlice";
 import { setSigninModal } from "../../store/slices/authSlice";
+import { useAppDispatch, type RootState } from "../../store/store";
+import { logout, setLoginModal } from "../../store/slices/authSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
     return (
         <header className="bg-[#2B6777] h-20.25 flex items-center justify-center px-4 md:px-0">
@@ -67,26 +70,49 @@ const Header = () => {
                         {/* Desktop: cart icon on left */}
                         <AiOutlineShoppingCart className="hidden md:block w-6 h-6 text-white cursor-pointer" onClick={() => navigate('/cart')} />
 
-                        <button
-                            className="flex items-center justify-center w-8 h-8 border border-[#00EAFF] rounded-lg md:hidden text-white"
-                            onClick={() => dispatch(setLoginModal(true))}
-                        >
-                            <FiLogIn className="w-5 h-5" />
-                        </button>
+                        {
+                            !isLoggedIn &&
+                            (
+                                <>
+                                    <button
+                                        className="flex items-center justify-center w-8 h-8 border border-[#00EAFF] rounded-lg md:hidden text-white"
+                                        onClick={() => dispatch(setLoginModal(true))}
+                                    >
+                                        <FiLogIn className="w-5 h-5" />
+                                    </button>
 
-                        {/* Desktop: Login buttons */}
-                        <button
-                            className="hidden md:flex w-18.5 h-8 text-white text-[14px] rounded-lg border border-[#00EAFF] items-center justify-center"
-                            onClick={() => dispatch(setLoginModal(true))}
-                        >
-                            Login
-                        </button>
-                          <button
-                            className="hidden md:flex w-18.5 h-8 text-white text-[14px] rounded-lg border border-[#00EAFF] items-center justify-center"
-                           onClick={() => dispatch(setSigninModal(true))}
-                        >
-                            signin
-                        </button>
+                                    {/* Desktop: Login buttons */}
+                                    <button
+                                        className="hidden md:flex w-18.5 h-8 text-white text-[14px] rounded-lg border border-[#00EAFF] items-center justify-center"
+                                        onClick={() => dispatch(setLoginModal(true))}
+                                    >
+                                        Login
+                                    </button>
+                                </>
+                            )
+                        }
+
+                        {
+                            isLoggedIn && (
+                                <>
+                                    <button
+                                        className="flex items-center justify-center w-8 h-8 border border-[#00EAFF] rounded-lg md:hidden text-white"
+                                        onClick={() => dispatch(logout())}
+                                    >
+                                        <FiLogOut className="w-5 h-5" />
+                                    </button>
+
+
+                                    {/* Desktop: Login buttons */}
+                                    <button
+                                        className="hidden md:flex w-18.5 h-8 text-white text-[14px] rounded-lg border border-[#00EAFF] items-center justify-center"
+                                        onClick={() => dispatch(logout())}
+                                    >
+                                        LogOut
+                                    </button>
+                                </>
+                            )
+                        }
 
                     </div>
 
