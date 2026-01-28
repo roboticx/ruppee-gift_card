@@ -91,8 +91,10 @@ const StoreDetail = () => {
                             bg-center bg-cover bg-no-repeat
                             rounded-xl
                             shadow-xl
-                            overflow-hidden
-                            bg-[url(${storeBannerImg})]`}
+                            overflow-hidden`}
+                        style={{
+                            backgroundImage: `url(${storeBannerImg})`
+                        }}
                     ></div>
                 </div>
 
