@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import RootLayout from '../layouts/RootLayout'
 import AuthLayout from '../layouts/AuthLayout'
+import UserList from '../(main)/AdminPanel/UserList/UserList'
 import Cart from '../(main)/Guest/Cart'
 import Failed from '../(main)/User/Failed'
 import Home from '../(main)/Guest/Home/Home'
@@ -18,6 +19,7 @@ const AppRoutes = () => {
                 <Route path={'/card-details'} element={<StoreDetail />} />
                 <Route path={'/store-list/:categoryId'} element={<StoreList />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/overview" element={<UserList />} />
             </Route>
 
             <Route element={<AuthLayout />}>
