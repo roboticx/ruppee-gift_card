@@ -1,7 +1,7 @@
 // import { useState } from "react";
-import { useAppDispatch, type RootState } from "../../store/store";
-import { addToCart, decreaseQuantity, getQuantityById, increaseQuantity } from "../../store/slices/cartSlice";
 import { useSelector } from "react-redux";
+import { addToCart, decreaseQuantity, getQuantityById, increaseQuantity } from "../../../store/slices/cartSlice";
+import { useAppDispatch, type RootState } from "../../../store/store";
 
 const Card = ({ cardData }: any) => {
     // const [count, setCount] = useState<number>(0);

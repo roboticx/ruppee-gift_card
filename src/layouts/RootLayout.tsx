@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../Components/common/Header";
 import Footer from "../Components/common/Footer";
-import LoginComponent from "../(main)/Login/LoginComponent";
+import LoginComponent from "../Components/models/Login/LoginComponent";
+import SignUpComponent from "../Components/models/SignUp/Signup";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../store/store";
-import { useEffect } from "react";
-import SignUpComponent from "../(main)/SignUp/Signup";
 import { getAuthRedux, setLoginModal } from "../store/slices/authSlice";
 
 const RootLayout = () => {

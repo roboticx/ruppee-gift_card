@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import StoreComponent from "../../Components/common/StoreComponent";
+import StoreComponent from "../../../Components/common/StoreComponent";
 
 const Recommended = () => {
     const onlineShopping = [
