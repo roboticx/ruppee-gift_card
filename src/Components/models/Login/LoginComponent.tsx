@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
-import { POST } from "../../utils/apiutils";
-import { useAppDispatch } from "../../store/store";
-import { loginSuccess, setLoginModal, setUser } from "../../store/slices/authSlice";
+import { setLoginModal, loginSuccess, setUser } from "../../../store/slices/authSlice";
+import { useAppDispatch } from "../../../store/store";
+import { POST } from "../../../utils/apiutils";
 
 interface Props {
     isOpen: boolean;

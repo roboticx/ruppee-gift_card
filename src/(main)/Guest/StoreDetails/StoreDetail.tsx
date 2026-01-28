@@ -1,4 +1,4 @@
-import CardList from '../../Components/Card/CardList';
+import CardList from "../../../Components/common/Card/CardList";
 
 const StoreDetail = () => {
 

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import StoreComponent from "../../Components/common/StoreComponent";
+import StoreComponent from "../../../Components/common/StoreComponent";
 
 const StoreList = () => {
 
