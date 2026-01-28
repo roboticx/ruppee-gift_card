@@ -1,3 +1,7 @@
+import { IoWarningOutline } from "react-icons/io5";
+import { RxCrossCircled } from "react-icons/rx";
+import { FaGifts } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa6";
 const Failed = () => {
     return (
         <div className='flex justify-center py-5'>
@@ -14,33 +18,37 @@ const Failed = () => {
                             className="w-[140px] sm:w-[215px] h-72  absolute top-1/2 rotate-[-40deg] -translate-y-1/2 -right-5 shadow-black shadow-xl flex justify-center items-center gap-1 sm:gap-2
                             bg-[#D22E2D] ">
                             <span className="font-sans font-semibold text-white text-[13px] rotate-[40deg] flex items-center gap-2 justify-center sm:text-[16px] leading-[100%]">
+                                <IoWarningOutline size={22} />
                                 Failed
-                                <img src="/images/r.png" alt="" className="h-3 sm:h-4" />
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className="flex mb-7 justify-center px-2">
-                    <div className="max-w-[95vw] flex items-center gap-1.5 sm:gap-3">
-                        <img
-                            src="/icons/varify.svg"
-                            alt=""
-                            className="h-5 sm:h-8 shrink-0"
+                <div className="flex justify-center px-3 sm:px-4 mb-7">
+                    <div className="w-full max-w-md flex flex-col items-center text-center gap-2">
+                        {/* Icon */}
+                        <RxCrossCircled
+                            size={28}
+                            className="text-[#D22E2D] sm:w-8 sm:h-8"
                         />
-
-                        <div className="flex items-center overflow-hidden">
-                            <p className="font-sans font-semibold text-[16px] sm:text-[18px] leading-[100%] shrink-0">
-                                1002.3
+                        {/* Content */}
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="font-sans font-semibold text-[#D22E2D] text-[18px] sm:text-[28px] leading-tight">
+                                Payment Failed
                             </p>
-
-                            <img
-                                src="/images/r.png"
-                                alt=""
-                                className="h-3 sm:h-4 shrink-0"
-                            />
-
-                            <p className="font-sans font-normal text-[13px] sm:text-[18px] leading-[100%] whitespace-nowrap truncate">
-                                Paid Successfully
+                            {/* Amount */}
+                            <div className="flex items-center gap-1">
+                                <p className="font-sans font-semibold text-[16px] sm:text-[18px]">
+                                    1002.3
+                                </p>
+                                <img
+                                    src="/images/r.png"
+                                    alt=""
+                                    className="h-3 sm:h-4"
+                                />
+                            </div>
+                            <p className="font-sans font-normal text-[13px] sm:text-[16px] text-gray-600">
+                                Transaction Declined
                             </p>
                         </div>
                     </div>
@@ -56,95 +64,82 @@ const Failed = () => {
                                 <p className="font-sans font-medium text-[16px] leading-[100%] tracking-normal">
                                     Gift voucher worth of 1000
                                 </p>
-                                <div className='flex flex-row sm:flex-col'>
-                                    <div className='flex items-center gap-1'>
-                                        <p className="font-sans font-medium text-[17px] line-through leading-[100%] tracking-normal text-[#828282]">
-                                            1000.00
-                                        </p>
-                                        <img src="/images/r.png" alt="" className='h-5 w-5 rounded-lg' />
-                                    </div>
-                                    <div className='flex items-center gap-1'>
-                                        <p className="font-sans font-medium text-[17px] leading-[100%] tracking-normal text-[#828282]">
-                                            1000.00
-                                        </p>
-                                        <img src="/images/r.png" alt="" className='h-5 w-5 rounded-lg' />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div className='w-full flex justify-start sm:justify-end'>
-                            <div className="bg-[#15997226] font-semibold flex items-center justify-center gap-3 sm:gap-4 px-4 py-2 w-full sm:w-[173px] h-[40px] rounded-[22px] border border-[#159972] text-sm sm:text-base">
-                                Purchased
-                                <img src="/icons/varify.svg" alt="" className='h-5 w-5' />
+                            <div className="bg-[#991515f1] text-white font-semibold flex items-center justify-center gap-3 sm:gap-4 px-4 py-2 w-full sm:w-[173px] h-[40px] rounded-[22px]  text-sm sm:text-base">
+                                Failed
+                                <IoWarningOutline size={22} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="p-5 bg-[#FBFCFC] grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="w-full border-b md:border-b-0 md:border-r border-[#afaeae] flex justify-center pb-6 md:pb-0">
-                        <div className="text-center  md:text-left">
-                            <img src="/images/bc.png" alt="" className="mx-auto md:mx-0" />
-                            <p className="font-inter text-[#828282] font-normal text-[12px] mb-6 leading-[120%] text-center tracking-normal">
-                                Ask the cashier to scan the barcode <br /> or manually enter the code in the POS
-                            </p>
+                    <div className="w-full border-b md:border-b-0 md:border-r border-[#afaeae] px-4 sm:px-6 md:px-10 py-6 flex justify-center">
+                        <div className="w-full max-w-md grid grid-cols-1 gap-6">
+                            <div className="w-full bg-white shadow-xl rounded-xl p-4 sm:p-5">
+                                <div className="border p-3 rounded-md flex items-center gap-3 w-full">
+                                    <img src="/images/bc.png" alt="" className="h-4 sm:h-5" />
+                                    <span className="text-base sm:text-lg font-semibold">
+                                        Need Help?
+                                    </span>
+                                </div>
+                                <div className="mt-4 space-y-3">
+                                    <button className="w-full flex items-center justify-between text-left">
+                                        <span className="text-sm sm:text-base">
+                                            How to resolve payment issues
+                                        </span>
+                                        <FaAngleRight size={20} className="shrink-0" />
+                                    </button>
+                                    <div className="flex justify-end">
+                                        <button className="px-4 py-2 rounded-md bg-slate-300 hover:bg-slate-400 transition font-semibold text-sm">
+                                            Learn more
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full bg-white shadow-xl rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                                <FaGifts size={40} className="text-[#9F2222]" />
+                                <div className="flex flex-col items-center sm:items-start gap-1 w-full">
+                                    <span className="font-medium text-sm sm:text-base">
+                                        No gift card available this time.
+                                    </span>
+                                    <span className="text-sm text-gray-600">
+                                        Better luck next time
+                                    </span>
+                                    <img src="/images/r.png" alt="" className="h-4 w-4 mt-1" />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div className="w-full flex flex-col gap-4 py-6">
-                        <div className="bg-[#EFEFEF] p-4 rounded-lg flex justify-between items-center">
-                            <p className="font-inter font-semibold text-[16px] leading-[120%] tracking-normal">
-                                Code : 746547564785648
-                            </p>
-                            <img src="/icons/copy.svg" alt="" className="h-5 w-5" />
-                        </div>
-                        <div className="bg-[#EFEFEF] p-4 rounded-lg flex justify-between items-center">
-                            <p className="font-inter font-semibold text-[16px] leading-[120%] tracking-normal">
-                                Code : 746547564785648
-                            </p>
-                            <img src="/icons/copy.svg" alt="" className="h-5 w-5" />
-                        </div>
-                        <div className="border border-[#afaeae] p-3 rounded-lg flex flex-col sm:flex-row sm:justify-between gap-4">
-                            <div className="flex gap-2 items-center justify-between">
-                                <p className="font-inter font-semibold text-[16px] leading-[120%] tracking-normal">How to redeem</p>
-                                <img src="/icons/info.svg" alt="" className="h-5 w-5" />
+                        <div className="bg-white shadow-2xl p-4 rounded-lg flex flex-col gap-3 justify-between">
+                            <div className="flex gap-2 items-center">
+                                <IoWarningOutline size={22} color="#9F2222" />
+                                <p className="font-inter text-red-700  font-semibold text-[16px] leading-[120%] tracking-normal">
+                                    Insufficient balance in your account
+                                </p>
                             </div>
-                            <div className="flex gap-2 items-center justify-between">
-                                <p className="font-inter font-semibold text-[16px] leading-[120%] tracking-normal">Help</p>
-                                <img src="/icons/cloud.svg" alt="" className="h-5 w-5" />
-                            </div>
-                            <div className="flex gap-2 items-center justify-between">
-                                <p className="font-inter font-semibold text-[16px] leading-[120%] tracking-normal">Share</p>
-                                <img src="/icons/share.svg" alt="" className="h-5 w-5" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 mt-7 gap-6">
-                    <div className="w-full flex items-center gap-4 p-3 bg-[#F9A20126] border border-dashed border-[#F9A201] rounded-lg">
-                        <div className="w-20 h-20 bg-orange-500 rounded-md flex-shrink-0"></div>
-                        <div className="flex flex-col justify-center">
-                            <p className="font-inter font-medium text-[16px] leading-[120%] tracking-normal">
-                                One scratch card(s) earned
-                            </p>
-                            <p className="font-inter font-normal text-[16px] leading-[120%] tracking-normal text-[#333]">
-                                Tap to scratch
+                            <p className="font-inter text-black  font-semibold text-[16px] leading-[120%] tracking-normal">
+                                Please check your bank balance and try again.
                             </p>
                         </div>
-                    </div>
-                    <div className="w-full border  rounded-lg p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                        <p className="font-inter font-medium text-[16px] leading-[120%] tracking-normal">
-                            Transaction Details
-                        </p>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-[#F6F6F6] rounded-lg border border-gray-200 w-full sm:w-auto justify-center">
-                            <span className="font-inter font-medium text-[16px] leading-[120%] tracking-normal">
-                                Saved : 76
-                            </span>
-                            <img src="/images/r.png" alt="" className="h-5 w-5" />
-                        </button>
+                        <div className="bg-white shadow-2xl p-4 rounded-lg flex flex-col gap-3 justify-between">
+                            <div className="flex gap-2 items-center">
+                                <IoWarningOutline size={22} color="#9F2222" />
+                                <p className="font-inter text-red-700  font-semibold text-[16px] leading-[120%] tracking-normal">
+                                    Transaction declined by Bank
+                                </p>
+                            </div>
+                            <p className="font-inter text-black  font-semibold text-[16px] leading-[120%] tracking-normal">
+                                Contact your bank for more details.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
 export default Failed

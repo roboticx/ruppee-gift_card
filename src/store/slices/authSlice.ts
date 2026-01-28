@@ -5,12 +5,14 @@ interface AuthState {
     isLoggedIn: boolean;
     token: string | null;
     isLoginModalOpen: boolean;
+    isSignupModalOpen: boolean;
 }
 
 const initialState: AuthState = {
     isLoggedIn: false,
     token: null,
     isLoginModalOpen: false,
+    isSignupModalOpen: false,
 };
 
 const authSlice = createSlice({
@@ -28,10 +30,13 @@ const authSlice = createSlice({
         },
         setLoginModal(state, action: PayloadAction<boolean>) {
             state.isLoginModalOpen = action.payload
-        }
+        },
+        setSigninModal(state, action: PayloadAction<boolean>) {
+            state.isSignupModalOpen = action.payload
+        },
     },
 });
 
-export const { loginSuccess, logout, setLoginModal } = authSlice.actions;
+export const { loginSuccess, logout, setLoginModal,setSigninModal } = authSlice.actions;
 
 export default authSlice.reducer;
