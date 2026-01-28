@@ -1,7 +1,6 @@
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { setLoginModal } from "../../store/slices/authSlice";
 import { setSigninModal } from "../../store/slices/authSlice";
 import { useAppDispatch, type RootState } from "../../store/store";
 import { logout, setLoginModal } from "../../store/slices/authSlice";
@@ -87,6 +86,12 @@ const Header = () => {
                                         onClick={() => dispatch(setLoginModal(true))}
                                     >
                                         Login
+                                    </button>
+                                      <button
+                                        className="hidden md:flex w-18.5 h-8 text-white text-[14px] rounded-lg border border-[#00EAFF] items-center justify-center"
+                                        onClick={() => dispatch(setSigninModal(true))}
+                                    >
+                                        sign up
                                     </button>
                                 </>
                             )
