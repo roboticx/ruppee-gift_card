@@ -8,10 +8,10 @@ const Categories = () => {
             <div className=" px-4 sm:px-6  py-10">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
                     <div>
-                        <h1 className="font-semibold text-lg sm:text-xl">
+                            <h1 className="font-bold text-3xl">
                             Products
                         </h1>
-                        <p className="text-xs sm:text-sm text-gray-500">
+                         <p className="font-semibold text-md text-gray-500">
                             All your listed Products
                         </p>
                     </div>
@@ -23,18 +23,18 @@ const Categories = () => {
                     <table className="min-w-[900px] w-full border-collapse">
                         <thead>
                             <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                <th className="px-4 py-3">Image</th>
-                                <th className="px-4 py-3">Name</th>
-                                <th className="px-4 py-3">Products</th>
-                                <th className="px-4 py-3">Status</th>
-                                <th className="px-4 py-3">Created at</th>
-                                <th className="px-4 py-3 text-center">Actions</th>
+                                <th className="px-4 py-2">Image</th>
+                                <th className="px-4 py-2">Name</th>
+                                <th className="px-4 py-2">Products</th>
+                                <th className="px-4 py-2">Status</th>
+                                <th className="px-4 py-2">Created at</th>
+                                <th className="px-4 py-2 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="text-sm text-gray-800">
                                <tr
-                                className="border-t hover:bg-gray-50 transition">
-                                <td className="px-4 py-4">
+                                className="border-t border-gray-300 hover:bg-gray-50 transition">
+                                <td className="px-4 py-2">
                                     <div className="w-16 h-16 overflow-hidden rounded-lg">
                                         <img src="https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg" alt="" className="w-16 h-16 object-cover" />
                                     </div>
@@ -63,7 +63,7 @@ const Categories = () => {
                                 </td>
                             </tr>
                              <tr
-                                className="border-t hover:bg-gray-50 transition">
+                                className="border-t border-gray-300 hover:bg-gray-50 transition">
                                 <td className="px-4 py-4">
                                     <div className="w-16 h-16 overflow-hidden rounded-lg">
                                         <img src="https://121clicks.com/wp-content/uploads/2023/11/outstanding-nature-photos-reddit-02.jpg" alt="" className="w-16 h-16 object-cover" />
