@@ -9,7 +9,7 @@ import { useState } from "react";
 const UserList = () => {
     const[isOpen, setISopen]=useState(false)
   return (
-    <div className="p-4 bg-blue-50 min-h-screen">
+    <div className="p-4  min-h-screen">
       <div className="flex flex-col gap-1">
         <h1 className="font-semibold text-lg sm:text-xl">
           Welcome Back Admin
@@ -19,22 +19,39 @@ const UserList = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-        {[
-          "Total users",
-          "Active Products",
-          "Total orders",
-          "Revenue",
-        ].map((title, index) => (
+       
           <div
-            key={index}
-            className="px-3 py-3 flex flex-col bg-[#EBF4DD] gap-3 rounded-lg">
-            <p className="text-sm sm:text-lg font-bold">{title}</p>
+            className="px-3 py-3 flex border-[#ace4c4] border flex-col  gap-6 rounded-lg">
+            <p className="text-sm sm:text-lg font-semibold text-gray-400">Total users</p>
             <div className="w-full flex justify-between items-center">
               <p className="text-xl sm:text-2xl font-bold">21</p>
               <IoMdTrendingUp className="text-red-600 text-xl" />
             </div>
           </div>
-        ))}
+           <div
+            className="px-3 py-3 flex border-[#e4afaf] bg-[#FEF2F2] border flex-col  gap-6 rounded-lg">
+            <p className="text-sm sm:text-lg font-semibold text-gray-400">Active Products</p>
+            <div className="w-full flex justify-between items-center">
+              <p className="text-xl sm:text-2xl font-bold">21</p>
+              <IoMdTrendingUp className="text-red-600 text-xl" />
+            </div>
+          </div>
+           <div
+            className="px-3 py-3 flex border-[#d4c0a8] bg-[#FFF7ED] border flex-col  gap-6 rounded-lg">
+            <p className="text-sm sm:text-lg font-semibold text-gray-400">Total     Orders</p>
+            <div className="w-full flex justify-between items-center">
+              <p className="text-xl sm:text-2xl font-bold">21</p>
+              <IoMdTrendingUp className="text-red-600 text-xl" />
+            </div>
+          </div>
+           <div
+            className="px-3 py-3 flex border-[#d8cbe4] bg-[#FAF5FF] border flex-col  gap-6  rounded-lg">
+             <p className="text-sm sm:text-lg font-semibold text-gray-400">Revenue</p>
+            <div className="w-full flex justify-between items-center">
+              <p className="text-xl sm:text-2xl font-bold">21</p>
+              <IoMdTrendingUp className="text-red-600 text-xl" />
+            </div>
+          </div>
       </div>
       <div className="mt-6">
         <h1 className="text-lg sm:text-xl font-semibold">
@@ -42,12 +59,12 @@ const UserList = () => {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-          <div className="p-4 flex gap-4 bg-[#EBF4DD] rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+          <div className="border-[#ace4c4] border  p-6 flex gap-4  rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
             <div className="h-12 w-12 flex justify-center items-center bg-green-200 rounded-lg">
               <GoPlus className="text-green-600 text-xl" />
             </div>
             <div className="flex flex-col">
-              <p className="text-sm sm:text-lg font-semibold text-gray-400">
+              <p className="text-sm sm:text-lg font-medium text-gray-400">
                 Edit Products
               </p>
               <p className="text-xs font-semibold text-gray-900">
@@ -55,29 +72,29 @@ const UserList = () => {
               </p>
             </div>
           </div>
-          <div className="p-4 flex gap-4 bg-[#FEF2F2] rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
-            <div className="h-12 w-12 flex justify-center items-center bg-red-200 rounded-lg">
-              <FaFileAlt className="text-red-600 text-xl" />
+        <div className="border-[#FFD4D4] border  p-6 flex gap-4 bg-[#FEF2F2]  rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+            <div className="h-12 w-12 flex justify-center items-center bg-[#FFE2E2] rounded-lg">
+              <FaFileAlt className="text-[#E61213] text-xl" />
             </div>
             <div className="flex flex-col">
-              <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                View recent orders
+              <p className="text-sm sm:text-lg font-medium text-gray-400">
+                Edit Products
               </p>
               <p className="text-xs font-semibold text-gray-900">
-                Check Latest Orders
+                Edit an existing product listing
               </p>
             </div>
           </div>
-          <div className="p-4 flex gap-4 bg-[#FAF5FF] rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
-            <div className="h-12 w-12 flex justify-center items-center bg-purple-200 rounded-lg">
-              <ImUsers className="text-purple-600 text-xl" />
+          <div className="border-[#E8D4FE] border  bg-[#FAF5FF] p-6 flex gap-4  rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+            <div className="h-12 w-12 flex justify-center items-center bg-[#F3E8FF] rounded-lg">
+              <ImUsers className="text-[#9810FA] text-xl" />
             </div>
             <div className="flex flex-col">
-              <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                Manage users
+              <p className="text-sm sm:text-lg font-medium text-gray-400">
+                Edit Products
               </p>
               <p className="text-xs font-semibold text-gray-900">
-                Update User Info
+                Edit an existing product listing
               </p>
             </div>
           </div>
