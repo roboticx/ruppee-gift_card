@@ -116,13 +116,14 @@ const AdminSidebar = () => {
                             className={`
                                 bg-[#2B6777]/10 text-[#2b6777]
                                 absolute -right-3 top-1/2 -translate-y-1/2
-                                z-50
+                                z-500
                                 flex items-center justify-center 
                                 font-bold p-1.5
                                 transition 
                                 disabled:pointer-events-none disabled:opacity-50
                                 shadow rounded-full
                                 hover:bg-[#2B6777]/30 hover:text-[#2b6777]
+                                outline-none
                             `}
                             onClick={toggleSidebar}
                             disabled={isSmallScreen}
