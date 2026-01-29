@@ -11,6 +11,8 @@ import AdminLayout from '../layouts/AdminLayout'
 import ProductsList from '../(main)/AdminPanel/Products/ProductsList'
 import Categories from '../(main)/AdminPanel/Categories/Categories'
 import EditCategory from '../(main)/AdminPanel/Categories/EditCategory'
+import Users from '../(main)/AdminPanel/Users/Users'
+import Orders from '../(main)/AdminPanel/Orders/Orders'
 import Overview from '../(main)/AdminPanel/Overview/Overview'
 import Analytics from '../(main)/AdminPanel/Analytics/Analytics'
 
@@ -34,6 +36,8 @@ const AppRoutes = () => {
                 <Route path="/products-list" element={<ProductsList/>} />
                 <Route path="/categories" element={<Categories/>} />
                 <Route path="/edit-categories" element={<EditCategory/>} />
+                <Route path="/users" element={<Users/>} />
+                <Route path="/orders" element={<Orders/>} />
                 <Route path="/analytics" element={<Analytics/>} />
             </Route>
         </Routes>
