@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import RootLayout from '../layouts/RootLayout'
 import AuthLayout from '../layouts/AuthLayout'
-import UserList from '../(main)/AdminPanel/UserList/UserList'
 import Cart from '../(main)/Guest/Cart'
 import Failed from '../(main)/User/Failed'
 import Home from '../(main)/Guest/Home/Home'
@@ -12,6 +11,7 @@ import AdminLayout from '../layouts/AdminLayout'
 import ProductsList from '../(main)/AdminPanel/Products/ProductsList'
 import Categories from '../(main)/AdminPanel/Categories/Categories'
 import EditCategory from '../(main)/AdminPanel/Categories/EditCategory'
+import Overview from '../(main)/AdminPanel/Overview/Overview'
 
 const AppRoutes = () => {
     return (
@@ -29,7 +29,7 @@ const AppRoutes = () => {
             </Route>
 
             <Route element={<AdminLayout />}>
-                <Route path="/overview" element={<UserList />} />
+                <Route path="/overview" element={<Overview />} />
                 <Route path="/products-list" element={<ProductsList/>} />
                 <Route path="/categories" element={<Categories/>} />
                 <Route path="/edit-categories" element={<EditCategory/>} />
