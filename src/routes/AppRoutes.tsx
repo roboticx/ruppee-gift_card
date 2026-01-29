@@ -10,6 +10,8 @@ import StoreList from '../(main)/Guest/StoreList/StoreList'
 import ThankYou from '../(main)/User/ThankYou'
 import AdminLayout from '../layouts/AdminLayout'
 import Exclusive from '../(main)/Guest/Home/Exclusive'
+import ProductsList from '../(main)/AdminPanel/Products/ProductsList'
+import Categories from '../(main)/AdminPanel/Categories/Categories'
 
 const AppRoutes = () => {
     return (
@@ -20,6 +22,10 @@ const AppRoutes = () => {
                 <Route path={'/store-list/:categoryId'} element={<StoreList />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/overview" element={<UserList />} />
+                <Route path="/products-list" element={<ProductsList/>} />
+                <Route path="/categories" element={<Categories/>} />
+                
+                
             </Route>
 
             <Route element={<AuthLayout />}>
