@@ -2,6 +2,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import AdminHeader from "../Components/common/Admin/AdminHeader";
 import { useAppSelector } from "../store/store";
+import AdminSidebar from "../Components/common/Admin/AdminSidebar";
 
 const AdminLayout = () => {
 
@@ -13,12 +14,15 @@ const AdminLayout = () => {
     }
 
     return (
-        <>
-            <AdminHeader />
-            <main className="min-h-[65.8vh] max-w-350.5 mx-auto">
+        <div className="relative flex h-screen overflow-hidden">
+            <div className="flex-none z-10">
+                <AdminSidebar />
+            </div>
+            <div className="flex-1 overflow-auto z-0 bg-[#E4F4FF] px-5">
+                <AdminHeader />
                 <Outlet />
-            </main>
-        </>
+            </div>
+        </div>
     )
 }
 

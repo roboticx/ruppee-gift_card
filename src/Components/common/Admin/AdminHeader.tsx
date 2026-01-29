@@ -8,27 +8,18 @@ const AdminHeader = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <header className="bg-[#2B6777] h-20.25 flex items-center justify-center px-4 md:px-0">
-            <div className="w-full md:w-350">
-                <div className="relative flex h-20.25 items-center justify-end px-4">
+        <header className="bg-[#E4F4FF] h-16 flex items-center px-4 md:px-0 border-b border-gray-300">
 
-                    {/* RIGHT */}
-                    <div className="flex items-center gap-4">
-
-                        <button
-                            className="flex items-center justify-center w-8 h-8 text-white"
-                            onClick={() => dispatch(logout())}
-                        >
-                            <FiLogOut className="w-5 h-5" />
-                        </button>
-
-                    </div>
-
-                </div>
+            <div className="ml-auto px-10">
+                <button
+                    className="flex items-center justify-center text-[#2B6777]"
+                    onClick={() => dispatch(logout())}
+                >
+                    <FiLogOut className="w-5 h-5" />
+                </button>
             </div>
-        </header>
+        </header >
     )
 }
 
 export default AdminHeader
-
