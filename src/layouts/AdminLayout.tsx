@@ -1,16 +1,27 @@
-
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { useEffect } from "react";
+import { getAuthRedux, setLoginModal } from "../store/slices/authSlice";
 import AdminHeader from "../Components/common/Admin/AdminHeader";
-import { useAppSelector } from "../store/store";
 import AdminSidebar from "../Components/common/Admin/AdminSidebar";
 
 const AdminLayout = () => {
 
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+    const role = useAppSelector(state => state.auth.role);
+    
     const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const location = useLocation();
 
-    if (!isLoggedIn) {
+    useEffect(() => {
+        dispatch(getAuthRedux());
+        dispatch(setLoginModal(false));
+    }, [location.pathname])
+
+    if (!isLoggedIn || role !== 'admin') {
         navigate('/');
+        return;
     }
 
     return (

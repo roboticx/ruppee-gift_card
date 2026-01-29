@@ -1,15 +1,16 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import Footer from '../Components/common/Footer'
-import Header from '../Components/common/Header'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getAuthRedux, setLoginModal } from '../store/slices/authSlice';
 import { useAppSelector, useAppDispatch } from '../store/store';
+import Footer from '../Components/common/Footer';
+import Header from '../Components/common/Header';
 
 const AuthLayout = () => {
 
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+    const role = useAppSelector(state => state.auth.role);
+    
     const navigate = useNavigate()
-
     const dispatch = useAppDispatch();
     const location = useLocation();
 
@@ -18,7 +19,7 @@ const AuthLayout = () => {
         dispatch(setLoginModal(false));
     }, [location.pathname])
 
-    if (!isLoggedIn) {
+    if (!isLoggedIn || role !== 'user') {
         navigate('/');
         return;
     }

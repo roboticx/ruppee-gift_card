@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
-import { setLoginModal, loginSuccess, setUser } from "../../../store/slices/authSlice";
+import { setLoginModal, loginSuccess } from "../../../store/slices/authSlice";
 import { useAppDispatch } from "../../../store/store";
 import { POST } from "../../../utils/apiutils";
 
@@ -75,8 +75,8 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
 
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
-                dispatch(loginSuccess(res.data.token));
-                dispatch(setUser(res.data.user));
+                localStorage.setItem("role", res.data.user.role);
+                dispatch(loginSuccess(res.data));
             }
         }
         catch (e: any) { }
@@ -231,21 +231,24 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
 
                         <p className="text-[18px] text-black/90 leading-relaxed mb-8 font-normal">
                             Don’t receive it yet? {" "}
-                            {canResend ? (
-                                <button
-                                    className="underline"
-                                    onClick={resendOtp}
-                                >
-                                    Resend OTP
-                                </button>
-                            ) : (
-                                <span>
-                                    Retry again in {" "}
-                                    <span className="text-red-500">
-                                        {timeLeft}s
+                            {canResend
+                                ? (
+                                    <button
+                                        className="underline"
+                                        onClick={resendOtp}
+                                    >
+                                        Resend OTP
+                                    </button>
+                                )
+                                : (
+                                    <span>
+                                        Retry again in {" "}
+                                        <span className="text-red-500">
+                                            {timeLeft}s
+                                        </span>
                                     </span>
-                                </span>
-                            )}
+                                )
+                            }
                         </p>
 
                         {/* MOBILE NUMBER */}
