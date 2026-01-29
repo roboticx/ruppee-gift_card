@@ -7,6 +7,7 @@ interface AuthState {
     isLoginModalOpen: boolean;
     isSignupModalOpen: boolean;
     user: any;
+    role: string | null;
 }
 
 const initialState: AuthState = {
@@ -14,7 +15,8 @@ const initialState: AuthState = {
     token: null,
     isLoginModalOpen: false,
     isSignupModalOpen: false,
-    user: null
+    user: null,
+    role: null
 };
 
 const authSlice = createSlice({
@@ -24,6 +26,7 @@ const authSlice = createSlice({
         getAuthRedux(state) {
             state.token = localStorage.getItem('token');
             state.isLoggedIn = !!state.token;
+            state.role = localStorage.getItem('role');
 
             try {
                 const userString = localStorage.getItem('user');
@@ -34,17 +37,21 @@ const authSlice = createSlice({
                 state.user = null;
             }
         },
-        loginSuccess(state, action: PayloadAction<string>) {
+        loginSuccess(state, action: PayloadAction<any>) {
             state.isLoggedIn = true;
-            state.token = action.payload;
+            state.token = action.payload.token;
+            state.user = action.payload.user;
+            state.role = action.payload.user.role;
             state.isLoginModalOpen = false;
         },
         logout(state) {
             state.isLoggedIn = false;
             state.token = null;
             state.user = null;
+            state.role = null;
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.removeItem('role');
         },
         setLoginModal(state, action: PayloadAction<boolean>) {
             state.isLoginModalOpen = action.payload
@@ -55,9 +62,12 @@ const authSlice = createSlice({
         setUser(state, action: PayloadAction<any>) {
             state.user = action.payload
         },
+        setRole(state, action: PayloadAction<any>) {
+            state.role = action.payload
+        },
     },
 });
 
-export const { loginSuccess, logout, setLoginModal, setUser, getAuthRedux, setSigninModal } = authSlice.actions;
+export const { loginSuccess, logout, setLoginModal, setUser, getAuthRedux, setSigninModal, setRole } = authSlice.actions;
 
 export default authSlice.reducer;

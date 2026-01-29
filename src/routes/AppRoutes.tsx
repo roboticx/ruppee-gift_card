@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import RootLayout from '../layouts/RootLayout'
 import AuthLayout from '../layouts/AuthLayout'
-import UserList from '../(main)/AdminPanel/UserList/UserList'
 import Cart from '../(main)/Guest/Cart'
 import Failed from '../(main)/User/Failed'
 import Home from '../(main)/Guest/Home/Home'
@@ -14,6 +13,8 @@ import Categories from '../(main)/AdminPanel/Categories/Categories'
 import EditCategory from '../(main)/AdminPanel/Categories/EditCategory'
 import Users from '../(main)/AdminPanel/Users/Users'
 import Orders from '../(main)/AdminPanel/Orders/Orders'
+import Overview from '../(main)/AdminPanel/Overview/Overview'
+import Analytics from '../(main)/AdminPanel/Analytics/Analytics'
 
 const AppRoutes = () => {
     return (
@@ -31,12 +32,13 @@ const AppRoutes = () => {
             </Route>
 
             <Route element={<AdminLayout />}>
-                <Route path="/overview" element={<UserList />} />
+                <Route path="/overview" element={<Overview />} />
                 <Route path="/products-list" element={<ProductsList/>} />
                 <Route path="/categories" element={<Categories/>} />
                 <Route path="/edit-categories" element={<EditCategory/>} />
                 <Route path="/users" element={<Users/>} />
                 <Route path="/orders" element={<Orders/>} />
+                <Route path="/analytics" element={<Analytics/>} />
             </Route>
         </Routes>
     )
