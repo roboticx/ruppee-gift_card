@@ -1,23 +1,22 @@
 import React from 'react'
 
-interface ViewMoreDialogProps {
+interface Props {
     isOpen: boolean
     onClose: () => void
 }
 
-const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose }) => {
+const AddUser: React.FC<Props> = ({ isOpen, onClose }) => {
 
     if (!isOpen) return null
 
     return (
-
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />.
 
             <div className="relative w-[90%] sm:w-[25%] bg-[#E4F4FF] rounded-2xl p-6  shadow-xl z-10 animate-scaleIn">
-                <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-xl font-semibold text-gray-900">
-                        Update User
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-semibold text-gray-900">
+                        Add New User
                     </h2>
 
                     <button onClick={onClose}
@@ -70,6 +69,34 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose }) => {
                     </div>
                 </div>
 
+                <div className="text-sm text-gray-600 mt-3">
+                    <div className="flex flex-col gap-1">
+                        <h1>
+                            Password
+                        </h1>
+
+                        <input
+                            type="password"
+                            className="py-2 px-5 border border-gray-300 outline-0 rounded-lg w-full"
+                            placeholder={`Enter Password`}
+                        />
+                    </div>
+                </div>
+
+                <div className="text-sm text-gray-600 mt-3">
+                    <div className="flex flex-col gap-1">
+                        <h1>
+                            Confirm Password
+                        </h1>
+
+                        <input
+                            type="password"
+                            className="py-2 px-5 border border-gray-300 outline-0 rounded-lg w-full"
+                            placeholder={`COnfirm Password`}
+                        />
+                    </div>
+                </div>
+
                 <div className="text-sm mt-3 text-gray-600">
                     <div className="flex flex-col gap-1">
                         <h1>
@@ -92,8 +119,8 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose }) => {
                     </button>
 
                     <button
-                        className="px-4 py-2 rounded-lg text-sm w-1/2 bg-violet-700 hover:bg-violet-600 text-white hover:opacity-90">
-                        Update 
+                        className="px-4 py-2 rounded-lg text-sm w-1/2 bg-green-700 hover:bg-green-600 text-white hover:opacity-90">
+                        Add
                     </button>
                 </div>
             </div>
@@ -101,4 +128,4 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose }) => {
     )
 }
 
-export default UpdateUser
+export default AddUser
