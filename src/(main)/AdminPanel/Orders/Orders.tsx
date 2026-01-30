@@ -7,27 +7,57 @@ const Orders = () => {
     return (
         <div className="min-h-screen">
             <div className="w-full px-4 sm:px-6 py-16">
-
-                <div className="flex flex-col gap-1 mb-5">
-                    <h1 className="font-bold text-3xl">
-                        Orders
-                    </h1>
-
-                    <p className="font-semibold text-md text-gray-500">
-                        Track your All Orders Here.
-                    </p>
-                </div>
-
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
-                    <input
-                        type="text"
-                        placeholder="Search user by the name,email,phone"
-                        className="w-full border border-gray-300 rounded-md py-3 px-4 text-sm outline-none" />
-
-                    <button className="w-full sm:w-44 flex justify-center items-center gap-2 bg-red-700 text-white font-bold rounded-md py-2 px-3 text-sm">
-                        <MdFilterAlt size={20} /> Clear Filter
-                    </button>
+                    <div>
+                        <h1 className="font-bold text-3xl">
+                            Orders
+                        </h1>
+                         <p className="font-semibold text-md text-gray-500">
+                            Track your all order here
+                        </p>
+                    </div>
+                 
                 </div>
+          <div className="flex flex-col sm:flex-row gap-4 mb-10">
+  {/* Search */}
+  <div className="relative w-full sm:w-[450px]">
+    <input
+      type="text"
+      placeholder="Search by name, email, or phone"
+      className="w-full border border-gray-300 bg-tr rounded-lg py-3 pl-11 pr-4 text-sm 
+                 outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
+    />
+    <svg
+      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+      width="18"
+      height="18"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  </div>
+
+  {/* Status Filter */}
+  <select
+    className="w-full sm:w-64 border border-gray-300 rounded-lg py-3 px-4 text-sm 
+               outline-none bg-transparent text-gray-700
+               focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
+  >
+    <option value="">All Status</option>
+    <option value="created">Created</option>
+    <option value="paid">Payment Done</option>
+    <option value="processing">Processing</option>
+    <option value="confirmed">Confirmed</option>
+    <option value="completed">Completed</option>
+    <option value="failed">Failed</option>
+  </select>
+</div>
 
                 <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto">
                     <table className="min-w-225 w-full border-collapse">
