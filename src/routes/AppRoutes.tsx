@@ -33,12 +33,12 @@ const AppRoutes = () => {
 
             <Route element={<AdminLayout />}>
                 <Route path="/overview" element={<Overview />} />
-                <Route path="/products-list" element={<ProductsList/>} />
-                <Route path="/categories" element={<Categories/>} />
-                <Route path="/edit-categories" element={<EditCategory/>} />
-                <Route path="/users" element={<Users/>} />
-                <Route path="/orders" element={<Orders/>} />
-                <Route path="/analytics" element={<Analytics/>} />
+                <Route path="/products-list" element={<ProductsList />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/edit-category/:id" element={<EditCategory />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/analytics" element={<Analytics />} />
             </Route>
         </Routes>
     )

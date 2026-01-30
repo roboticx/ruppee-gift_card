@@ -1,4 +1,4 @@
-
+import { MdFilterAlt } from "react-icons/md"
 import { useState } from "react"
 import { BsThreeDots } from "react-icons/bs"
 const Orders = () => {
@@ -60,7 +60,7 @@ const Orders = () => {
 </div>
 
                 <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto">
-                    <table className="min-w-[900px] w-full border-collapse">
+                    <table className="min-w-225 w-full border-collapse">
                         <thead>
                             <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
                                 <th className="px-4 py-3">Order Id</th>
@@ -86,14 +86,14 @@ const Orders = () => {
                                             <span className="font-semibold text-xs  text-gray-400">lorem</span>
                                         </div>
                                     </td>
-                                     <td className="px-4 py-4">
+                                    <td className="px-4 py-4">
                                         <span className="bg-red-200 px-3 py-1 rounded-full border border-red-300 font-semibold">
                                             Active
                                         </span>
                                     </td>
                                     <td className="px-4 py-4">
                                         <span className="bg-gray-200 px-3 py-1 rounded-full font-semibold">
-                                           Created
+                                            Created
                                         </span>
                                     </td>
                                     <td className="px-4 py-4 relative">

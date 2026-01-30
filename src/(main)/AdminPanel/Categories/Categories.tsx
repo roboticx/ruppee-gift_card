@@ -1,101 +1,219 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
-import { Link } from "react-router-dom";
+import Toggle from "../../../Components/common/Toggle";
+import DeleteConfirmation from "../../../Components/models/DeleteConfirmation";
+
+const categoryList = [
+    {
+        _id: "cat_001",
+        Image: "https://picsum.photos/seed/p1/200/200",
+        Name: "Digital Subscriptions",
+        Products: 17,
+        Status: true,
+        Created: "2025-11-03"
+    },
+    {
+        _id: "cat_002",
+        Image: "https://picsum.photos/seed/p2/200/200",
+        Name: "Adventure & Outdoor Experiences",
+        Products: 9,
+        Status: false,
+        Created: "2025-12-21"
+    },
+    {
+        _id: "cat_003",
+        Image: "https://picsum.photos/seed/p3/200/200",
+        Name: "Gourmet & Dining Deals",
+        Products: 31,
+        Status: true,
+        Created: "2025-10-14"
+    },
+    {
+        _id: "cat_004",
+        Image: "https://picsum.photos/seed/p4/200/200",
+        Name: "Smart Gadgets & Accessories",
+        Products: 22,
+        Status: true,
+        Created: "2025-09-09"
+    },
+    {
+        _id: "cat_005",
+        Image: "https://picsum.photos/seed/p5/200/200",
+        Name: "Luxury Beauty Collections",
+        Products: 14,
+        Status: false,
+        Created: "2025-12-02"
+    },
+    {
+        _id: "cat_006",
+        Image: "https://picsum.photos/seed/p6/200/200",
+        Name: "Fitness & Lifestyle Passes",
+        Products: 27,
+        Status: true,
+        Created: "2026-01-05"
+    },
+    {
+        _id: "cat_007",
+        Image: "https://picsum.photos/seed/p7/200/200",
+        Name: "Gaming Credits & Wallets",
+        Products: 35,
+        Status: true,
+        Created: "2025-11-28"
+    },
+    {
+        _id: "cat_008",
+        Image: "https://picsum.photos/seed/p8/200/200",
+        Name: "Daily Essentials & Mart Deals",
+        Products: 12,
+        Status: true,
+        Created: "2026-01-11"
+    },
+    {
+        _id: "cat_009",
+        Image: "https://picsum.photos/seed/p9/200/200",
+        Name: "Streetwear & Apparel Cards",
+        Products: 19,
+        Status: false,
+        Created: "2025-08-17"
+    },
+    {
+        _id: "cat_010",
+        Image: "https://picsum.photos/seed/p10/200/200",
+        Name: "Health Services & Checkups",
+        Products: 8,
+        Status: true,
+        Created: "2026-01-18"
+    }
+];
+
 const Categories = () => {
-    const [isActive, setIsActive] = useState(true);
+
+    const [categories, setCategories] = useState<any>(categoryList);
+    const [isDeleteConfirm, setDeleteConfirm] = useState(false);
+    const [modalId, setModalId] = useState('');
+
+    const navigate = useNavigate();
+
+    const updateStatus = async (id: string) => {
+        setCategories((prev: any) =>
+            prev.map((item: any) =>
+                item._id === id
+                    ? { ...item, Status: !item.Status }
+                    : item
+            )
+        );
+    }
+
+    const deleteProduct = async () => {
+        setDeleteConfirm(false);
+        console.log('item Deleted : ', modalId);
+    }
+
     return (
         <div className=" min-h-screen">
-            <div className=" px-4 sm:px-6  py-10">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
+            <div className="px-4 sm:px-6  py-10">
+
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-2">
                     <div>
-                            <h1 className="font-bold text-3xl">
-                            Products
+                        <h1 className="font-bold text-3xl">
+                            Categories
                         </h1>
-                         <p className="font-semibold text-md text-gray-500">
-                            All your listed Products
+
+                        <p className="font-semibold text-md text-gray-500">
+                            Manage Products Categories
                         </p>
                     </div>
+
+                    <button className="flex items-center gap-1 bg-purple-600 px-4 py-2 text-white font-semibold rounded-lg">
+                        <GoPlus color="white" size={22} />
+
+                        <span>Add Category</span>
+                    </button>
                 </div>
-                <div className="flex items-start w-full">
-                    <button className="flex items-center gap-2 bg-red-700 px-4 py-2 text-white font-semibold rounded-lg"><GoPlus color="white" size={22} /><span>Add Category</span></button>
-                </div>
-                <div className="bg-white border mt-12 border-gray-300 rounded-xl overflow-x-auto">
-                    <table className="min-w-[900px] w-full border-collapse">
+
+                <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto mt-6">
+                    <table className="min-w-225 w-full">
                         <thead>
-                            <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                <th className="px-4 py-2">Image</th>
-                                <th className="px-4 py-2">Name</th>
-                                <th className="px-4 py-2">Products</th>
-                                <th className="px-4 py-2">Status</th>
-                                <th className="px-4 py-2">Created at</th>
-                                <th className="px-4 py-2 text-center">Actions</th>
+                            <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
+                                <th className="px-4 py-3">Image</th>
+                                <th className="px-4 py-3">Name</th>
+                                <th className="px-4 py-3">Products</th>
+                                <th className="px-4 py-3">Status</th>
+                                <th className="px-4 py-3">Created at</th>
+                                <th className="px-4 py-3 text-center">Actions</th>
                             </tr>
                         </thead>
+
                         <tbody className="text-sm text-gray-800">
-                               <tr
-                                className="border-t border-gray-300 hover:bg-gray-50 transition">
-                                <td className="px-4 py-2">
-                                    <div className="w-16 h-16 overflow-hidden rounded-lg">
-                                        <img src="https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg" alt="" className="w-16 h-16 object-cover" />
-                                    </div>
-                                </td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">Amit singh manral</td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                    
-                                    10%
-                                </td>
-                                <td className="px-4 py-4"><button
-                                        onClick={() => setIsActive(!isActive)}
-                                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition
-                                        ${isActive ? "bg-green-500" : "bg-gray-300"}`}>
-                                        <span
-                                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition
-                                        ${isActive ? "translate-x-6" : "translate-x-1"}`}/>
-                                    </button></td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                    {new Date().toLocaleDateString()}
-                                </td>
-                                <td className="px-4 py-4">
-                                    <div className="flex justify-center items-center gap-4">
-                                        <span className=" text-sm font-semibold text-gray-500 underline">Edit</span>
-                                        <span className=" text-sm font-semibold text-red-500 underline">Delete</span>
-                                    </div>
-                                </td>
-                            </tr>
-                             <tr
-                                className="border-t border-gray-300 hover:bg-gray-50 transition">
-                                <td className="px-4 py-4">
-                                    <div className="w-16 h-16 overflow-hidden rounded-lg">
-                                        <img src="https://121clicks.com/wp-content/uploads/2023/11/outstanding-nature-photos-reddit-02.jpg" alt="" className="w-16 h-16 object-cover" />
-                                    </div>
-                                </td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">Amit singh manral</td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                    
-                                    10%
-                                </td>
-                                <td className="px-4 py-4"><button
-                                        onClick={() => setIsActive(!isActive)}
-                                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition
-                                        ${isActive ? "bg-green-500" : "bg-gray-300"}`}>
-                                        <span
-                                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition
-                                        ${isActive ? "translate-x-6" : "translate-x-1"}`}/>
-                                    </button></td>
-                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                    {new Date().toLocaleDateString()}
-                                </td>
-                                <td className="px-4 py-4">
-                                    <div className="flex justify-center items-center gap-4">
-                                        <Link to={"/edit-categories"} className=" text-sm font-semibold text-gray-500 underline" >Edit</Link>
-                                        <span className=" text-sm font-semibold text-red-500 underline">Delete</span>
-                                    </div>
-                                </td>
-                            </tr>
+                            {
+                                categories.map((item: any) => (
+                                    <tr key={item._id}
+                                        className="border-t hover:bg-gray-50 border-gray-300">
+                                        <td className="px-4 py-4">
+                                            <div className="w-16 h-16 overflow-hidden rounded-lg">
+                                                <img
+                                                    src={item.Image}
+                                                    alt={item.Name}
+                                                    className="w-16 h-16 object-cover"
+                                                />
+                                            </div>
+                                        </td>
+
+                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500">
+                                            {item.Name}
+                                        </td>
+
+                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500">
+                                            {item.Products} products
+                                        </td>
+
+                                        <td className="px-4 py-4">
+                                            <Toggle
+                                                status={item.Status}
+                                                toggleName={'status'}
+                                                onChange={() => updateStatus(item._id)}
+                                            />
+                                        </td>
+
+                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500 text-nowrap">
+                                            {new Date(item.Created).toLocaleString()}
+                                        </td>
+
+                                        <td className="px-4 py-4">
+                                            <div className="flex justify-center items-center gap-4">
+                                                <button
+                                                    className="text-sm font-semibold text-gray-500 hover:underline"
+                                                    onClick={() => navigate(`/edit-category/${item._id}`)}
+                                                >
+                                                    Edit
+                                                </button>
+
+                                                <button
+                                                    className="text-sm font-semibold text-red-500 hover:underline"
+                                                    onClick={() => {
+                                                        setDeleteConfirm(true);
+                                                        setModalId(item._id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>
+
             </div>
+
+            <DeleteConfirmation
+                isOpen={isDeleteConfirm}
+                onClose={() => setDeleteConfirm(false)}
+                onDelete={deleteProduct}
+            />
         </div>
     );
 };
