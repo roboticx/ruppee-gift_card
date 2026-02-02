@@ -3,6 +3,7 @@ import { FaIdCard } from "react-icons/fa6";
 import { SiAmazonsimpleemailservice } from "react-icons/si";
 import { setSigninModal } from "../../../store/slices/authSlice";
 import { useAppDispatch } from "../../../store/store";
+import { createPortal } from "react-dom";
 
 interface Props {
   isOpen: boolean;
@@ -28,7 +29,7 @@ const SignUpComponent: React.FC<Props> = ({ isOpen }) => {
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-137.5 bg-white rounded-3xl shadow-2xl overflow-hidden">
         <div className="flex w-full">
@@ -157,7 +158,8 @@ const SignUpComponent: React.FC<Props> = ({ isOpen }) => {
             )
         }
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

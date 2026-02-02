@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { useEffect } from "react";
 import { getAuthRedux, setLoginModal } from "../store/slices/authSlice";
@@ -7,22 +7,27 @@ import AdminSidebar from "../Components/common/Admin/AdminSidebar";
 
 const AdminLayout = () => {
 
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
-    const role = useAppSelector(state => state.auth.role);
-    
+    const { isLoggedIn, role, authLoaded } = useAppSelector(
+        state => state.auth
+    );
+
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
-    const location = useLocation();
 
     useEffect(() => {
         dispatch(getAuthRedux());
         dispatch(setLoginModal(false));
-    }, [location.pathname])
+    }, [dispatch]);
 
-    if (!isLoggedIn || role !== 'admin') {
-        navigate('/');
-        return;
-    }
+    useEffect(() => {
+        if (!authLoaded) return;
+
+        if (!isLoggedIn || role !== "admin") {
+            navigate("/", { replace: true });
+        }
+    }, [authLoaded, isLoggedIn, role, navigate]);
+
+    if (!authLoaded) return null;
 
     return (
         <div className="relative flex h-screen">

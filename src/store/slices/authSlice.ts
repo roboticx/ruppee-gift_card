@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 
 interface AuthState {
     isLoggedIn: boolean;
@@ -8,6 +9,7 @@ interface AuthState {
     isSignupModalOpen: boolean;
     user: any;
     role: string | null;
+    authLoaded: boolean;
 }
 
 const initialState: AuthState = {
@@ -16,7 +18,8 @@ const initialState: AuthState = {
     isLoginModalOpen: false,
     isSignupModalOpen: false,
     user: null,
-    role: null
+    role: null,
+    authLoaded: false,
 };
 
 const authSlice = createSlice({
@@ -27,6 +30,7 @@ const authSlice = createSlice({
             state.token = localStorage.getItem('token');
             state.isLoggedIn = !!state.token;
             state.role = localStorage.getItem('role');
+            state.authLoaded = true;
 
             try {
                 const userString = localStorage.getItem('user');

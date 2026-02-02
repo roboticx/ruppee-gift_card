@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     MdQrCode,
     MdCategory,
@@ -7,18 +7,41 @@ import {
     MdCheckCircle,
     MdAccessTime,
 } from 'react-icons/md';
+import { FETCH } from '../../../utils/apiutils';
+import { createPortal } from 'react-dom';
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
-    productId: any;
+    productId: string;
 }
 
 const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
 
+    const [productData, setProductData] = useState<any>(null)
+
+    const getGiftCardById = async () => {
+        try {
+            const res = await FETCH({
+                url: `admin/giftcards/${productId}`,
+                toast: true,
+            });
+
+            setProductData(res.data);
+        }
+        catch (error: any) {
+            onClose();
+        }
+    }
+
+    useEffect(() => {
+        getGiftCardById();
+    }, []);
+
+
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
             {/* Modal Container */}
             <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full overflow-hidden flex flex-col md:flex-row relative animate-in zoom-in-95 duration-300">
@@ -44,11 +67,11 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
                             </h2>
 
                             <h2 className="text-xs font-bold text-slate-500 tracking-widest mb-1">
-                                {productId}
+                                {productData._id}
                             </h2>
 
                             <h1 className="text-2xl font-extrabold text-slate-800 leading-tight">
-                                {productId?.name || "Ajio Shoes"}
+                                {productData?.name}
                             </h1>
                         </div>
 
@@ -63,25 +86,25 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
                         <DetailItem
                             icon={<MdQrCode />}
                             label="SKU"
-                            value={productId?.sku || "578678478686467"}
+                            value={productData?.sku}
                         />
 
                         <DetailItem
                             icon={<MdCategory />}
                             label="Category"
-                            value={productId?.category || "330"}
+                            value={productData?.category}
                         />
 
                         <DetailItem
                             icon={<MdAttachMoney />}
                             label="Price Range"
-                            value={productId?.price || "500 - 5000"}
+                            value={productData?.price}
                         />
 
                         <DetailItem
                             icon={<MdPercent />}
                             label="Discount"
-                            value={`${productId?.discount || "76"}% OFF`}
+                            value={`${productData?.discount}% OFF`}
                             highlight
                         />
 
@@ -89,7 +112,7 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
                             <DetailItem
                                 icon={<MdAccessTime />}
                                 label="Last Updated"
-                                value={productId?.updated || "1/30/2026, 10:56:06 AM"}
+                                value={productData?.updated}
                             />
                         </div>
                     </div>
@@ -105,7 +128,8 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

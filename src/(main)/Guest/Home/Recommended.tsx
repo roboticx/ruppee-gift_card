@@ -53,8 +53,8 @@ const Recommended = () => {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-10  space-y-2 md:space-y-6 pt-3">
-                    {items.map((item) => (
-                        <StoreComponent store={item} />
+                    {items.map((item, index) => (
+                        <StoreComponent store={item} key={index} />
                     ))}
                 </div>
             </section>

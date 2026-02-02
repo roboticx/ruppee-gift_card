@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 interface Props {
     isOpen: boolean;
@@ -10,7 +11,7 @@ const DeleteConfirmation: React.FC<Props> = ({ isOpen, onDelete, onClose }) => {
 
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
 
             <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 animate-scaleIn">
@@ -54,8 +55,8 @@ const DeleteConfirmation: React.FC<Props> = ({ isOpen, onDelete, onClose }) => {
                 </div>
 
             </div>
-        </div>
-
+        </div>,
+        document.body
     );
 };
 

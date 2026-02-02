@@ -10,11 +10,11 @@ import ThankYou from '../(main)/User/ThankYou'
 import AdminLayout from '../layouts/AdminLayout'
 import ProductsList from '../(main)/AdminPanel/Products/ProductsList'
 import Categories from '../(main)/AdminPanel/Categories/Categories'
-import EditCategory from '../(main)/AdminPanel/Categories/EditCategory'
 import Orders from '../(main)/AdminPanel/Orders/Orders'
 import Overview from '../(main)/AdminPanel/Overview/Overview'
 import Analytics from '../(main)/AdminPanel/Analytics/Analytics'
 import UserList from '../(main)/AdminPanel/Users/UserList'
+import UpdateCategory from '../(main)/AdminPanel/Categories/UpdateCategory'
 
 const AppRoutes = () => {
     return (
@@ -35,7 +35,8 @@ const AppRoutes = () => {
                 <Route path="/overview" element={<Overview />} />
                 <Route path="/products-list" element={<ProductsList />} />
                 <Route path="/categories" element={<Categories />} />
-                <Route path="/edit-category/:id" element={<EditCategory />} />
+                <Route path="/edit-category/:id" element={<UpdateCategory />} />
+                <Route path="/add-category" element={<UpdateCategory />} />
                 <Route path="/users" element={<UserList />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/analytics" element={<Analytics />} />

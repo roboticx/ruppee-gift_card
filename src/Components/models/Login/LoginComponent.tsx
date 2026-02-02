@@ -3,6 +3,8 @@ import { ImCross } from "react-icons/im";
 import { setLoginModal, loginSuccess } from "../../../store/slices/authSlice";
 import { useAppDispatch } from "../../../store/store";
 import { POST } from "../../../utils/apiutils";
+import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 
 interface Props {
     isOpen: boolean;
@@ -18,6 +20,7 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
     const [canResend, setCanResend] = useState(true);
 
     const dispatch = useAppDispatch();
+    const navigator = useNavigate();
 
     const startOtpTimer = (
         setTimeLeft: React.Dispatch<React.SetStateAction<number>>,
@@ -77,6 +80,10 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 localStorage.setItem("role", res.data.user.role);
                 dispatch(loginSuccess(res.data));
+
+                if (res.data.user.role == 'admin') {
+                    navigator('/overview');
+                }
             }
         }
         catch (e: any) { }
@@ -137,7 +144,7 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
 
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
             <div className="w-full max-w-130 bg-white rounded-[14px] px-10 py-12 text-center shadow-xl relative">
 
@@ -289,7 +296,8 @@ const LoginComponent: React.FC<Props> = ({ isOpen }) => {
                 }
 
             </div>
-        </div >
+        </div >,
+        document.body
     );
 };
 

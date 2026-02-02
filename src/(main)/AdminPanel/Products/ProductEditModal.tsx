@@ -1,5 +1,7 @@
-import React, { useState, type ChangeEvent } from 'react';
+import React, { useEffect, useState, type ChangeEvent } from 'react';
 import { IoCloudUploadOutline } from 'react-icons/io5';
+import { FETCH } from '../../../utils/apiutils';
+import { createPortal } from 'react-dom';
 
 interface Props {
     isOpen: boolean;
@@ -39,7 +41,41 @@ const ProductEditModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
         }
     };
 
-    return (
+    const getGiftCardById = async () => {
+        try {
+            const res = await FETCH({
+                url: `admin/giftcards/${productId}`,
+                toast: true,
+            });
+
+            setFormData(res.data);
+        }
+        catch (error: any) {
+            onClose();
+        }
+    }
+
+    useEffect(() => {
+        getGiftCardById();
+    }, []);
+
+    const updateGiftCard = async () => {
+        try {
+            const res = ({
+                url: `admin/giftcards/${productId}`,
+                data: formData,
+                toast: true
+            });
+
+            console.log(res);
+        }
+        catch (e: any) { }
+        finally {
+            onClose();
+        }
+    }
+
+    return createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
 
             <div className="w-full max-w-2xl bg-[#EBF5FF] rounded-3xl shadow-2xl p-8 border border-white/50">
@@ -158,13 +194,17 @@ const ProductEditModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
                             Cancel
                         </button>
 
-                        <button className="px-8 py-3 rounded-xl bg-[#C00000] text-white font-semibold hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20">
+                        <button
+                            className="px-8 py-3 rounded-xl bg-[#C00000] text-white font-semibold hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20"
+                            onClick={updateGiftCard}
+                        >
                             Save Changes
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     )
 }
 

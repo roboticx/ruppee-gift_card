@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { IoSearchSharp, IoTrash } from "react-icons/io5";
@@ -6,89 +6,7 @@ import { PiNotePencilLight } from "react-icons/pi";
 import ViewProductModal from "./ViewProductModal";
 import ProductEditModal from "./ProductEditModal";
 import DeleteConfirmation from "../../../Components/models/DeleteConfirmation";
-
-const ProductList = [
-    {
-        _id: "65f1a1b2c3d4e501",
-        Product: "Wireless Mouse",
-        Category: "Electronics",
-        Price: 1200,
-        Discount: 10,
-        DiscountedPrice: 1080,
-        Status: "Active",
-        LastUpdated: "2026-01-25T10:22:14Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e502",
-        Product: "Running Shoes",
-        Category: "Footwear",
-        Price: 3500,
-        Discount: 20,
-        DiscountedPrice: 2800,
-        Status: "Active",
-        LastUpdated: "2026-01-20T08:10:45Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e503",
-        Product: "Bluetooth Speaker",
-        Category: "Electronics",
-        Price: 2200,
-        Discount: 15,
-        DiscountedPrice: 1870,
-        Status: "Inactive",
-        LastUpdated: "2026-01-18T14:32:01Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e504",
-        Product: "Office Chair",
-        Category: "Furniture",
-        Price: 7500,
-        Discount: 25,
-        DiscountedPrice: 5625,
-        Status: "Active",
-        LastUpdated: "2026-01-15T11:05:19Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e505",
-        Product: "Smart Watch",
-        Category: "Electronics",
-        Price: 5000,
-        Discount: 18,
-        DiscountedPrice: 4100,
-        Status: "Active",
-        LastUpdated: "2026-01-12T16:44:09Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e506",
-        Product: "Denim Jacket",
-        Category: "Clothing",
-        Price: 2800,
-        Discount: 12,
-        DiscountedPrice: 2464,
-        Status: "Inactive",
-        LastUpdated: "2026-01-10T09:12:33Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e507",
-        Product: "Gaming Keyboard",
-        Category: "Electronics",
-        Price: 3200,
-        Discount: 22,
-        DiscountedPrice: 2496,
-        Status: "Active",
-        LastUpdated: "2026-01-08T13:55:27Z",
-    },
-    {
-        _id: "65f1a1b2c3d4e508",
-        Product: "LED Desk Lamp",
-        Category: "Home Decor",
-        Price: 1500,
-        Discount: 5,
-        DiscountedPrice: 1425,
-        Status: "Active",
-        LastUpdated: "2026-01-05T18:21:11Z",
-    }
-];
+import { DELETE, FETCH, PUT } from "../../../utils/apiutils";
 
 const ProductsList = () => {
     const [isViewOpen, setIsViewOpen] = useState(false);
@@ -96,9 +14,78 @@ const ProductsList = () => {
     const [isDeleteConfirm, setDeleteConfirm] = useState(false);
     const [modalId, setModalId] = useState('');
 
+    const [statusFilter, setStatusFilter] = useState('all');
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const [productList, setProductList] = useState<any>(null);
+
+    useEffect(() => {
+        getProductList();
+    }, []);
+
+    const getProductList = async () => {
+
+        const params = new URLSearchParams();
+
+        if (statusFilter == 'active') {
+            params.append("isActive", 'true');
+        }
+        if (statusFilter == 'inactive') {
+            params.append("isActive", 'false');
+        }
+        // if (currentPage) params.append("page", String(currentPage));
+        // if (rowsPerPage) params.append("limit", String(rowsPerPage));
+
+        const url = `admin/giftcards?${params.toString()}`;
+
+        try {
+            const response = await FETCH({
+                url: url,
+                toast: true,
+                showSuccess: false,
+                showError: true
+            });
+
+            setProductList(response.data);
+        }
+        catch (e: any) { }
+    }
+
+    const updateStatus = async (id: string, status: boolean) => {
+        try {
+            const res = await PUT({
+                url: `/api/admin/giftcards/${id}/active`,
+                data: { isActive: status },
+                toast: true
+            });
+
+            setProductList((prev: any) =>
+                prev.map((item: any) =>
+                    item._id === id
+                        ? { ...item, isActive: res.data.isActive }
+                        : item
+                )
+            );
+        }
+        catch (e: any) { }
+    }
+
     const deleteProduct = async () => {
-        setDeleteConfirm(false);
-        console.log('item Deleted : ', modalId);
+        try {
+            const res = await DELETE({
+                url: `/api/admin/giftcards/${modalId}`,
+                toast: true
+            });
+            console.log(res);
+
+            const index = productList.findIndex((item: any) => item._id === modalId);
+            productList.slice(index, 1);
+        }
+        catch (e: any) { }
+        finally {
+            setDeleteConfirm(false);
+        }
     }
 
     return (
@@ -117,7 +104,10 @@ const ProductsList = () => {
                         </p>
                     </div>
 
-                    <button className="bg-red-600 px-4 sm:px-6 py-2 flex items-center gap-3 rounded-lg text-white font-semibold">
+                    <button
+                        className="bg-red-600 px-4 sm:px-6 py-2 flex items-center gap-3 rounded-lg text-white font-semibold"
+                        onClick={getProductList}
+                    >
                         <AiOutlineCloudSync size={26} />
                         Sync
                     </button>
@@ -137,98 +127,111 @@ const ProductsList = () => {
                         </span>
                     </div>
 
-                    <select className="ml-auto w-full sm:w-44 border border-gray-300 rounded-md py-2 px-3 text-sm">
-                        <option>All</option>
-                        <option>Active</option>
-                        <option>InActive</option>
+                    <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                        className="ml-auto w-full sm:w-44 border border-gray-300 rounded-md py-2 px-3 text-sm"
+                    >
+                        <option value={'all'}>
+                            All
+                        </option>
+                        <option value={'active'}>
+                            Active
+                        </option>
+                        <option value={'inactive'}>
+                            InActive
+                        </option>
                     </select>
                 </div>
 
-                <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto">
-                    <table className="min-w-225 w-full">
-                        <thead>
-                            <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
-                                <th className="px-4 py-3">Product</th>
-                                <th className="px-4 py-3">Category</th>
-                                <th className="px-4 py-3">Price</th>
-                                <th className="px-4 py-3">Discount</th>
-                                <th className="px-4 py-3">Discounted Price</th>
-                                <th className="px-4 py-3">Status</th>
-                                <th className="px-4 py-3">Last Updated</th>
-                                <th className="px-4 py-3 text-center">Actions</th>
-                            </tr>
-                        </thead>
-
-                        <tbody className="text-sm text-gray-800">
-                            {ProductList.map((item: any) => (
-                                <tr key={item._id} className="border-t hover:bg-gray-50 border-gray-300">
-                                    <td className="px-4 py-4">
-                                        {item?.Product}
-                                    </td>
-                                    <td className="px-4 py-4">
-                                        {item?.Category}
-                                    </td>
-                                    <td className="px-4 py-4">
-                                        ₹{item?.Price}
-                                    </td>
-                                    <td className="px-4 py-4">
-                                        {item.Discount}%
-                                    </td>
-                                    <td className="px-4 py-4">
-                                        ₹{item?.DiscountedPrice}
-                                    </td>
-
-                                    <td className="px-4 py-4">
-                                        <span
-                                            className={`
-                                                px-3 py-1 text-xs rounded-full 
-                                                ${item.Status === 'Active'
-                                                    ? 'bg-green-100 text-green-600'
-                                                    : 'bg-red-100 text-red-600'
-                                                }
-                                              `}
-                                        >
-                                            {item.Status}
-                                        </span>
-                                    </td>
-
-                                    <td className="px-4 py-4 text-nowrap">
-                                        {new Date(item.LastUpdated).toLocaleString()}
-                                    </td>
-
-                                    <td className="px-4 py-4">
-                                        <div className="flex justify-center gap-4">
-                                            <FaRegEye
-                                                onClick={() => {
-                                                    setIsViewOpen(true);
-                                                    setModalId(item._id);
-                                                }}
-                                                className="cursor-pointer text-blue-500 text-lg"
-                                            />
-
-                                            <PiNotePencilLight
-                                                onClick={() => {
-                                                    setIsEditOpen(true);
-                                                    setModalId(item._id);
-                                                }}
-                                                className="cursor-pointer text-gray-600 text-lg"
-                                            />
-
-                                            <IoTrash
-                                                onClick={() => {
-                                                    setDeleteConfirm(true);
-                                                    setModalId(item._id);
-                                                }}
-                                                className="cursor-pointer text-red-500 text-lg"
-                                            />
-                                        </div>
-                                    </td>
+                {
+                    productList &&
+                    <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto">
+                        <table className="min-w-225 w-full">
+                            <thead>
+                                <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
+                                    <th className="px-4 py-3">Product</th>
+                                    <th className="px-4 py-3">Category</th>
+                                    <th className="px-4 py-3">Price</th>
+                                    <th className="px-4 py-3">Discount</th>
+                                    <th className="px-4 py-3">Discounted Price</th>
+                                    <th className="px-4 py-3">Status</th>
+                                    <th className="px-4 py-3">Last Updated</th>
+                                    <th className="px-4 py-3 text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
 
+                            <tbody className="text-sm text-gray-800">
+                                {productList.map((item: any) => (
+                                    <tr key={item._id} className="border-t hover:bg-gray-50 border-gray-300">
+                                        <td className="px-4 py-4">
+                                            {item?.Product}
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            {item?.Category}
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            ₹{item?.Price}
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            {item.Discount}%
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            ₹{item?.DiscountedPrice}
+                                        </td>
+
+                                        <td className="px-4 py-4">
+                                            <span
+                                                className={`
+                                                px-3 py-1 text-xs rounded-full 
+                                                ${item.isActive
+                                                        ? 'bg-green-100 text-green-600'
+                                                        : 'bg-red-100 text-red-600'
+                                                    }
+                                              `}
+                                                onClick={() => updateStatus(item._id, !item.isActive)}
+                                            >
+                                                {item.isActive ? 'Active' : 'InActive'}
+                                            </span>
+                                        </td>
+
+                                        <td className="px-4 py-4 text-nowrap">
+                                            {new Date(item.LastUpdated).toLocaleString()}
+                                        </td>
+
+                                        <td className="px-4 py-4">
+                                            <div className="flex justify-center gap-4">
+                                                <FaRegEye
+                                                    onClick={() => {
+                                                        setIsViewOpen(true);
+                                                        setModalId(item._id);
+                                                    }}
+                                                    className="cursor-pointer text-blue-500 text-lg"
+                                                />
+
+                                                <PiNotePencilLight
+                                                    onClick={() => {
+                                                        setIsEditOpen(true);
+                                                        setModalId(item._id);
+                                                    }}
+                                                    className="cursor-pointer text-gray-600 text-lg"
+                                                />
+
+                                                <IoTrash
+                                                    onClick={() => {
+                                                        setDeleteConfirm(true);
+                                                        setModalId(item._id);
+                                                    }}
+                                                    className="cursor-pointer text-red-500 text-lg"
+                                                />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                }
             </div>
 
             <ViewProductModal

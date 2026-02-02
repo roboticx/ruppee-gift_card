@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
 import Toggle from "../../../Components/common/Toggle";
 import DeleteConfirmation from "../../../Components/models/DeleteConfirmation";
+import { DELETE, FETCH, PUT } from "../../../utils/apiutils";
 
 const categoryList = [
     {
@@ -95,19 +96,57 @@ const Categories = () => {
 
     const navigate = useNavigate();
 
-    const updateStatus = async (id: string) => {
-        setCategories((prev: any) =>
-            prev.map((item: any) =>
-                item._id === id
-                    ? { ...item, Status: !item.Status }
-                    : item
-            )
-        );
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    const getCategories = async () => {
+        try {
+            const res = await FETCH({
+                url: `admin/categories`,
+                showError: true,
+            });
+
+            setCategories(res.data);
+        }
+        catch (e: any) { }
     }
 
-    const deleteProduct = async () => {
-        setDeleteConfirm(false);
-        console.log('item Deleted : ', modalId);
+
+    const updateStatus = async (id: string, status: boolean) => {
+        try {
+            const res = await PUT({
+                url: `admin/categories/${id}/active`,
+                data: { isActive: status },
+                toast: true
+            });
+
+            setCategories((prev: any) =>
+                prev.map((item: any) =>
+                    item._id === id
+                        ? { ...item, isActive: res.data.isActive }
+                        : item
+                )
+            );
+        }
+        catch (e: any) { }
+    }
+
+    const deleteCategory = async () => {
+        try {
+            const res = await DELETE({
+                url: `/api/admin/categories/${modalId}`,
+                toast: true
+            });
+            console.log(res);
+
+            const index = categories.findIndex((item: any) => item._id === modalId);
+            categories.slice(index, 1);
+        }
+        catch (e: any) { }
+        finally {
+            setDeleteConfirm(false);
+        }
     }
 
     return (
@@ -125,7 +164,10 @@ const Categories = () => {
                         </p>
                     </div>
 
-                    <button className="flex items-center gap-1 bg-purple-600 px-4 py-2 text-white font-semibold rounded-lg">
+                    <button
+                        className="flex items-center gap-1 bg-purple-600 px-4 py-2 text-white font-semibold rounded-lg"
+                        onClick={() => navigate('/add-category')}
+                    >
                         <GoPlus color="white" size={22} />
 
                         <span>Add Category</span>
@@ -172,7 +214,7 @@ const Categories = () => {
                                             <Toggle
                                                 status={item.Status}
                                                 toggleName={'status'}
-                                                onChange={() => updateStatus(item._id)}
+                                                onChange={() => updateStatus(item._id, !item.isActive)}
                                             />
                                         </td>
 
@@ -212,7 +254,7 @@ const Categories = () => {
             <DeleteConfirmation
                 isOpen={isDeleteConfirm}
                 onClose={() => setDeleteConfirm(false)}
-                onDelete={deleteProduct}
+                onDelete={deleteCategory}
             />
         </div>
     );
