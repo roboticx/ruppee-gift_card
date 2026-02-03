@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { FETCH, PUT } from '../../../../utils/apiutils';
+import { GrFormClose } from 'react-icons/gr';
 
 interface ViewMoreDialogProps {
     isOpen: boolean;
@@ -16,8 +17,8 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose, userId }) 
         try {
             const res = await FETCH({
                 url: `admin/users/${userId}`,
-                showError: true,
                 toast: true,
+                showError: true,
                 showSuccess: false
             });
 
@@ -31,7 +32,7 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose, userId }) 
         }
         catch (error: any) {
             onClose();
-         }
+        }
     }
 
     useEffect(() => {
@@ -47,13 +48,11 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose, userId }) 
 
     const updateUser = async () => {
         try {
-            const res = await PUT({
+            await PUT({
                 url: `admin/users/${userId}`,
                 data: user,
                 toast: true
             });
-
-            setUser(res.data);
         }
         catch (error: any) { }
         finally {
@@ -68,15 +67,17 @@ const UpdateUser: React.FC<ViewMoreDialogProps> = ({ isOpen, onClose, userId }) 
             <div className="fixed inset-0 z-50 flex items-center justify-center">
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
-                <div className="relative w-[90%] sm:w-[50%] bg-[#E4F4FF] rounded-2xl p-6  shadow-xl z-10 animate-scaleIn">
+                <div className="relative w-[90%] sm:w-[50%] bg-[#E4F4FF] rounded-2xl pt-3 p-6 shadow-xl z-10 animate-scaleIn">
                     <div className="flex justify-between items-center mb-2">
                         <h2 className="text-xl font-semibold text-gray-900">
                             Update User
                         </h2>
 
-                        <button onClick={onClose}
-                            className="text-gray-400 hover:text-gray-700 text-xl">
-                            ✕
+                        <button
+                            onClick={onClose}
+                            className="text-red-400 hover:text-red-700">
+                            <GrFormClose size={40}
+                            />
                         </button>
                     </div>
 

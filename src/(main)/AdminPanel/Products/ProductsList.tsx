@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
-import { IoSearchSharp, IoTrash } from "react-icons/io5";
+import { IoSearchSharp } from "react-icons/io5";
 import { PiNotePencilLight } from "react-icons/pi";
 import ViewProductModal from "./ViewProductModal";
 import ProductEditModal from "./ProductEditModal";
-import DeleteConfirmation from "../../../Components/models/DeleteConfirmation";
-import { DELETE, FETCH, PUT } from "../../../utils/apiutils";
+import { FETCH, PUT } from "../../../utils/apiutils";
 
 const ProductsList = () => {
     const [isViewOpen, setIsViewOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
-    const [isDeleteConfirm, setDeleteConfirm] = useState(false);
     const [modalId, setModalId] = useState('');
 
     const [statusFilter, setStatusFilter] = useState('all');
@@ -55,7 +53,7 @@ const ProductsList = () => {
     const updateStatus = async (id: string, status: boolean) => {
         try {
             const res = await PUT({
-                url: `/api/admin/giftcards/${id}/active`,
+                url: `admin/giftcards/${id}`,
                 data: { isActive: status },
                 toast: true
             });
@@ -69,23 +67,6 @@ const ProductsList = () => {
             );
         }
         catch (e: any) { }
-    }
-
-    const deleteProduct = async () => {
-        try {
-            const res = await DELETE({
-                url: `/api/admin/giftcards/${modalId}`,
-                toast: true
-            });
-            console.log(res);
-
-            const index = productList.findIndex((item: any) => item._id === modalId);
-            productList.slice(index, 1);
-        }
-        catch (e: any) { }
-        finally {
-            setDeleteConfirm(false);
-        }
     }
 
     return (
@@ -150,40 +131,59 @@ const ProductsList = () => {
                         <table className="min-w-225 w-full">
                             <thead>
                                 <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
-                                    <th className="px-4 py-3">Product</th>
-                                    <th className="px-4 py-3">Category</th>
-                                    <th className="px-4 py-3">Price</th>
-                                    <th className="px-4 py-3">Discount</th>
-                                    <th className="px-4 py-3">Discounted Price</th>
-                                    <th className="px-4 py-3">Status</th>
-                                    <th className="px-4 py-3">Last Updated</th>
-                                    <th className="px-4 py-3 text-center">Actions</th>
+                                    <th className="px-4 py-3">
+                                        Title
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Category
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Price
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Discount
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Discounted Price
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Status
+                                    </th>
+                                    <th className="px-4 py-3">
+                                        Last Updated
+                                    </th>
+                                    <th className="px-4 py-3 text-center">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
 
                             <tbody className="text-sm text-gray-800">
                                 {productList.map((item: any) => (
-                                    <tr key={item._id} className="border-t hover:bg-gray-50 border-gray-300">
+                                    <tr
+                                        key={item._id}
+                                        className="border-t hover:bg-gray-50 border-gray-300"
+                                    >
                                         <td className="px-4 py-4">
-                                            {item?.Product}
+                                            {item?.title}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {item?.Category}
+                                            {item?.category?.name}
                                         </td>
                                         <td className="px-4 py-4">
-                                            ₹{item?.Price}
+                                            ₹{item?.price}
                                         </td>
                                         <td className="px-4 py-4">
-                                            {item.Discount}%
+                                            {item.discount}%
                                         </td>
                                         <td className="px-4 py-4">
-                                            ₹{item?.DiscountedPrice}
+                                            ₹{item?.price - ((item?.price / 100) * item?.discount)}
                                         </td>
 
                                         <td className="px-4 py-4">
                                             <span
                                                 className={`
-                                                px-3 py-1 text-xs rounded-full 
+                                                px-3 py-1 text-xs rounded-full cursor-pointer
                                                 ${item.isActive
                                                         ? 'bg-green-100 text-green-600'
                                                         : 'bg-red-100 text-red-600'
@@ -196,7 +196,7 @@ const ProductsList = () => {
                                         </td>
 
                                         <td className="px-4 py-4 text-nowrap">
-                                            {new Date(item.LastUpdated).toLocaleString()}
+                                            {new Date(item.updatedAt).toLocaleString()}
                                         </td>
 
                                         <td className="px-4 py-4">
@@ -216,14 +216,6 @@ const ProductsList = () => {
                                                     }}
                                                     className="cursor-pointer text-gray-600 text-lg"
                                                 />
-
-                                                <IoTrash
-                                                    onClick={() => {
-                                                        setDeleteConfirm(true);
-                                                        setModalId(item._id);
-                                                    }}
-                                                    className="cursor-pointer text-red-500 text-lg"
-                                                />
                                             </div>
                                         </td>
                                     </tr>
@@ -234,23 +226,26 @@ const ProductsList = () => {
                 }
             </div>
 
-            <ViewProductModal
-                isOpen={isViewOpen}
-                onClose={() => setIsViewOpen(false)}
-                productId={modalId}
-            />
+            {
+                isViewOpen &&
+                <ViewProductModal
+                    isOpen={isViewOpen}
+                    onClose={() => setIsViewOpen(false)}
+                    productId={modalId}
+                />
+            }
 
-            <ProductEditModal
-                isOpen={isEditOpen}
-                onClose={() => setIsEditOpen(false)}
-                productId={modalId}
-            />
-
-            <DeleteConfirmation
-                isOpen={isDeleteConfirm}
-                onClose={() => setDeleteConfirm(false)}
-                onDelete={deleteProduct}
-            />
+            {
+                isEditOpen &&
+                <ProductEditModal
+                    isOpen={isEditOpen}
+                    onClose={() => {
+                        setIsEditOpen(false)
+                        getProductList();
+                    }}
+                    productId={modalId}
+                />
+            }
         </>
     )
 }

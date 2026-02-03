@@ -9,6 +9,7 @@ import {
 } from 'react-icons/md';
 import { FETCH } from '../../../utils/apiutils';
 import { createPortal } from 'react-dom';
+import { TbBrandStocktwits } from 'react-icons/tb';
 
 interface Props {
     isOpen: boolean;
@@ -18,16 +19,18 @@ interface Props {
 
 const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
 
-    const [productData, setProductData] = useState<any>(null)
+    const [productData, setProductData] = useState<any>({})
 
     const getGiftCardById = async () => {
         try {
             const res = await FETCH({
                 url: `admin/giftcards/${productId}`,
                 toast: true,
+                showError: true,
+                showSuccess: false
             });
 
-            setProductData(res.data);
+            setProductData(res?.data);
         }
         catch (error: any) {
             onClose();
@@ -38,7 +41,6 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
         getGiftCardById();
     }, []);
 
-
     if (!isOpen) return null;
 
     return createPortal(
@@ -48,85 +50,98 @@ const ViewProductModal: React.FC<Props> = ({ isOpen, onClose, productId }) => {
 
                 {/* Left Side: Logo/Image Section */}
                 <div className="w-full md:w-2/5 bg-slate-50 flex items-center justify-center p-12 border-r border-slate-100">
-                    <div className="w-50 h-50 bg-white rounded-2xl shadow-sm flex items-center justify-center border border-slate-200">
+                    <div className="w-82 h-40 bg-white rounded-2xl shadow-sm flex items-center justify-center border border-slate-200">
                         <img
-                            src="https://pbs.twimg.com/profile_images/1354411482369282050/32WaTYpl_400x400.jpg"
+                            src="https://i.etsystatic.com/10158652/r/il/e9267d/1320400492/il_fullxfull.1320400492_d0mh.jpg"
                             alt="Brand Logo"
                             className="w-full object-cover"
                         />
                     </div>
                 </div>
+                {productData &&
+                    (
+                        <div className="w-full md:w-3/5 p-8 md:p-10 flex flex-col">
+                            {/* Header */}
+                            <div className="flex justify-between items-start mb-8">
+                                <div>
+                                    <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">
+                                        Product Details
+                                    </h2>
 
-                {/* Right Side: Content Section */}
-                <div className="w-full md:w-3/5 p-8 md:p-10 flex flex-col">
-                    {/* Header */}
-                    <div className="flex justify-between items-start mb-8">
-                        <div>
-                            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">
-                                Product Details
-                            </h2>
+                                    <h1 className="text-2xl font-extrabold text-slate-800 leading-tight">
+                                        {productData?.title}
+                                    </h1>
+                                </div>
 
-                            <h2 className="text-xs font-bold text-slate-500 tracking-widest mb-1">
-                                {productData._id}
-                            </h2>
+                                <span
+                                    className={`
+                                        flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border 
+                                        ${productData?.isActive ?
+                                            'bg-emerald-100 text-emerald-700 border-emerald-200' :
+                                            'bg-red-100 text-red-700 border-red-200'
+                                        }
+                                    `}
+                                >
+                                    <MdCheckCircle className="text-sm" />
 
-                            <h1 className="text-2xl font-extrabold text-slate-800 leading-tight">
-                                {productData?.name}
-                            </h1>
+                                    {productData?.isActive ? 'Active' : 'Inactive'}
+                                </span>
+                            </div>
+
+                            {/* Details Grid */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+                                <DetailItem
+                                    icon={<MdQrCode />}
+                                    label="SKU"
+                                    value={productData?.sku}
+                                />
+
+                                <DetailItem
+                                    icon={<MdCategory />}
+                                    label="Category"
+                                    value={productData?.category?.name}
+                                />
+
+                                <DetailItem
+                                    icon={<MdAttachMoney />}
+                                    label="Price Range"
+                                    value={productData?.price}
+                                />
+
+                                <DetailItem
+                                    icon={<TbBrandStocktwits />}
+                                    label="Stock"
+                                    value={productData?.stock}
+                                />
+
+                                <DetailItem
+                                    icon={<MdPercent />}
+                                    label="Discount"
+                                    value={`${productData?.discount}% OFF`}
+                                    highlight
+                                />
+
+                                <div className="col-span-full pt-4 border-t border-slate-100">
+                                    <DetailItem
+                                        icon={<MdAccessTime />}
+                                        label="Last Updated"
+                                        value={new Date(productData?.updatedAt).toLocaleString()}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Footer Action */}
+                            <div className="mt-10 flex justify-end">
+                                <button
+                                    onClick={onClose}
+                                    className="flex items-center gap-2 px-5 py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-800 active:scale-95 transition-all shadow-lg shadow-slate-200"
+                                >
+                                    Close
+                                </button>
+                            </div>
                         </div>
-
-                        <span className="flex items-center gap-1.5 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold border border-emerald-200">
-                            <MdCheckCircle className="text-sm" />
-                            ACTIVE
-                        </span>
-                    </div>
-
-                    {/* Details Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
-                        <DetailItem
-                            icon={<MdQrCode />}
-                            label="SKU"
-                            value={productData?.sku}
-                        />
-
-                        <DetailItem
-                            icon={<MdCategory />}
-                            label="Category"
-                            value={productData?.category}
-                        />
-
-                        <DetailItem
-                            icon={<MdAttachMoney />}
-                            label="Price Range"
-                            value={productData?.price}
-                        />
-
-                        <DetailItem
-                            icon={<MdPercent />}
-                            label="Discount"
-                            value={`${productData?.discount}% OFF`}
-                            highlight
-                        />
-
-                        <div className="col-span-full pt-4 border-t border-slate-100">
-                            <DetailItem
-                                icon={<MdAccessTime />}
-                                label="Last Updated"
-                                value={productData?.updated}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Footer Action */}
-                    <div className="mt-10 flex justify-end">
-                        <button
-                            onClick={onClose}
-                            className="flex items-center gap-2 px-5 py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-800 active:scale-95 transition-all shadow-lg shadow-slate-200"
-                        >
-                            Close
-                        </button>
-                    </div>
-                </div>
+                    )
+                }
             </div>
         </div>,
         document.body

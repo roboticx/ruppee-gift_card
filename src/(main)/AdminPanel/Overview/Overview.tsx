@@ -1,12 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoMdTrendingUp } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { FaEye, FaFileAlt } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
-import { useState } from "react";
 import ViewMore from "./Components/ViewMore";
 
 const Overview = () => {
     const [isOpen, setISopen] = useState(false);
+
+    const navigate = useNavigate();
 
     const randomDateStr = (): string => {
         const month = Math.floor(Math.random() * 12) + 1;
@@ -99,7 +102,10 @@ const Overview = () => {
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-                    <div className="bg-green-100 border-green-600 border p-6 flex gap-4 rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+                    <div
+                        className="bg-green-100 border-green-600 border p-6 flex gap-4 rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]"
+                        onClick={() => navigate('/products-list')}
+                    >
                         <div className="h-12 w-12 flex justify-center items-center bg-green-300/50 rounded-xl">
                             <GoPlus className="text-green-600 text-3xl" />
                         </div>
@@ -115,7 +121,10 @@ const Overview = () => {
                         </div>
                     </div>
 
-                    <div className="border-red-400 border p-6 flex gap-4 bg-[#FEF2F2] rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+                    <div
+                        className="border-red-400 border p-6 flex gap-4 bg-[#FEF2F2] rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]"
+                        onClick={() => navigate('/orders')}
+                    >
                         <div className="h-12 w-12 flex justify-center items-center bg-[#FFE2E2] rounded-xl">
                             <FaFileAlt className="text-[#E61213] text-xl" />
                         </div>
@@ -131,7 +140,10 @@ const Overview = () => {
                         </div>
                     </div>
 
-                    <div className="border-purple-400 border bg-[#FAF5FF] p-6 flex gap-4 rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]">
+                    <div
+                        className="border-purple-400 border bg-[#FAF5FF] p-6 flex gap-4 rounded-xl cursor-pointer transition hover:shadow-md hover:scale-[1.01]"
+                        onClick={() => navigate('/users')}
+                    >
                         <div className="h-12 w-12 flex justify-center items-center bg-[#F3E8FF] rounded-xl">
                             <ImUsers className="text-[#9810FA] text-xl" />
                         </div>

@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
-import { FcPackage } from "react-icons/fc";
+import { useEffect, useState } from "react";
+import { FcMoneyTransfer, FcPackage } from "react-icons/fc";
+import { FETCH } from "../../../utils/apiutils";
 
 const Orders = () => {
-    const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
     const statusFilter = [
         {
@@ -19,22 +18,52 @@ const Orders = () => {
             value: 'paid'
         },
         {
-            name: 'processing',
+            name: 'Processing',
             value: 'processing'
         },
         {
             name: 'Confirmed',
-            value: 'confirmed'
+            value: 'confirm'
         },
         {
             name: 'Completed',
             value: 'completed'
         },
         {
-            name: 'failed',
+            name: 'Failed',
             value: 'failed'
         },
-    ]
+    ];
+
+    const [orders, setOrders] = useState<any>([]);
+    const [status, setStatus] = useState('all');
+
+    const getOrderList = async () => {
+        setOrders([]);
+        const params = new URLSearchParams();
+
+        if (status !== 'all') params.append("status", status);
+        // if (currentPage) params.append("page", String(currentPage));
+        // if (rowsPerPage) params.append("limit", String(rowsPerPage));
+
+        const url = `admin/order?${params.toString()}`;
+
+        try {
+            const res = await FETCH({
+                url: url,
+                toast: true,
+                showSuccess: false,
+                showError: true
+            });
+
+            setOrders(res?.data);
+        }
+        catch (err: any) { }
+    }
+
+    useEffect(() => {
+        getOrderList();
+    }, [status]);
 
     return (
         <div className="w-full p-6">
@@ -83,10 +112,12 @@ const Orders = () => {
                             py-3 px-4 text-sm 
                             outline-none bg-transparent text-gray-700
                             focus:ring-2 focus:ring-gray-200 focus:border-gray-400"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
                 >
                     {
                         statusFilter.map((status: any) => (
-                            <option
+                            <option key={status?.value}
                                 value={status.value}
                                 className="capitalize"
                             >
@@ -111,70 +142,59 @@ const Orders = () => {
                     </thead>
 
                     <tbody className="text-sm text-gray-800">
-                        {[1, 2].map((_, index) => (
-                            <tr
-                                key={index}
-                                className="border-t border-gray-300 hover:bg-gray-50 transition"
-                            >
-                                <td>
-                                    <span className="font-semibold text-gray-400 uppercase">
-                                        dfgjuugghur373erwefgua347347
-                                    </span>
-                                </td>
-
-                                <td className="px-4 py-4 font-semibold text-gray-400">
-                                    {new Date().toLocaleString()}
-                                </td>
-
-                                <td className="px-4 py-4 font-semibold text-gray-400">
-                                    <div className="flex flex-col">
-                                        <span className="font-semibold text-md  text-gray-500">
-                                            Amit
+                        {
+                            orders.map((order: any) => (
+                                <tr
+                                    key={order?._id}
+                                    className="border-t border-gray-300 hover:bg-gray-50 transition"
+                                >
+                                    <td>
+                                        <span className="font-semibold text-gray-400 uppercase">
+                                            {order?._id}
                                         </span>
+                                    </td>
 
-                                        <span className="font-semibold text-xs  text-gray-400">
-                                            amit@hai.kya
+                                    <td className="px-4 py-4 font-semibold text-gray-400">
+                                        {new Date(order?.createdAt).toLocaleString()}
+                                    </td>
+
+                                    <td className="px-4 py-4 font-semibold text-gray-400">
+                                        <div className="flex flex-col">
+                                            <span className="font-semibold text-md  text-gray-500">
+                                                {order?.user?.userName}
+                                            </span>
+
+                                            <span className="font-semibold text-xs  text-gray-400">
+                                                {order?.user?.email?.value}
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        {order?.items?.length || 0}
+                                    </td>
+
+                                    <td>
+                                        <span className="bg-gray-100 px-3 py-1 rounded-full font-medium uppercase">
+                                            {order?.status}
                                         </span>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td>
-                                    3
-                                </td>
-
-                                <td>
-                                    <span className="bg-gray-100 px-3 py-1 rounded-full font-medium">
-                                        Created
-                                    </span>
-                                </td>
-
-                                <td className="px-4 py-4 relative">
-                                    <div className="flex justify-center">
-                                        <BsThreeDots
-                                            onClick={() =>
-                                                setOpenMenuIndex(openMenuIndex === index ? null : index)
-                                            }
-                                            className="cursor-pointer text-blue-500 text-lg hover:scale-110 transition"
-                                        />
-                                    </div>
-                                    
-                                    {openMenuIndex === index && (
-                                        <div className="absolute top-7 right-4 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                                    <td className="px-4 py-4 relative">
+                                        <div className="flex justify-center items-center">
                                             <button
                                                 onClick={() => {
-                                                    console.log("Confirm payment clicked")
-                                                    setOpenMenuIndex(null)
+                                                    console.log("Confirm payment clicked");
                                                 }}
-                                                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded-md"
+                                                className="p-2 rounded-md text-blue-600 border border-gray-100"
                                             >
-                                                Confirm payment
+                                                <FcMoneyTransfer size={22} />
                                             </button>
                                         </div>
-                                    )}
-                                </td>
-
-                            </tr>
-                        ))}
+                                    </td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>
