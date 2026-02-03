@@ -133,7 +133,7 @@ const UserList = () => {
                                                 </td>
 
                                                 <td className="px-4 py-4 font-semibold text-gray-500">
-                                                    {user?.email?.value || user?.email || ''}
+                                                    {user?.email?.value || user?.email?.isVerified || user?.email || ''}
                                                 </td>
 
                                                 <td className="px-4 py-4 font-semibold text-gray-500">
@@ -211,7 +211,10 @@ const UserList = () => {
                 viewUser &&
                 <UpdateUser
                     isOpen={viewUser}
-                    onClose={() => setViewUser(false)}
+                    onClose={() => {
+                        setViewUser(false)
+                        getUserList()
+                    }}
                     userId={modalId}
                 />
             }

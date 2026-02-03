@@ -78,7 +78,9 @@ const UpdateCategory = () => {
             const res = await POST({
                 url: `admin/categories`,
                 data: formData,
-                toast: true
+                toast: true,
+                showError: true,
+                showSuccess: false
             });
 
             console.log(res);
@@ -252,7 +254,7 @@ const UpdateCategory = () => {
                         type="text"
                         className='w-full px-5 py-2 rounded-xl mt-2 outline-0 border border-gray-300'
                         placeholder="Paste/Enter Image URL"
-                        value={categoryData.imageUrl}
+                        value={categoryData.imageUrl || categoryData?.image}
                         onChange={(e) => {
                             handleFormChange('imageUrl', e.target.value)
                             setImage(null);
@@ -318,7 +320,7 @@ const UpdateCategory = () => {
                         </div>
 
                         <span className="text-gray-500 text-xs mt-0.5">
-                            {categoryData.products.length} Products Selected
+                            {categoryData.products || 0} Products Selected
                         </span>
 
                         <div className="flex items-center justify-center gap-3 px-5 py-2">

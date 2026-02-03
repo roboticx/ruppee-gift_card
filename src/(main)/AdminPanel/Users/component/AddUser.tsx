@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { POST } from '../../../../utils/apiutils'
+import { GrFormClose } from 'react-icons/gr'
 
 interface Props {
     isOpen: boolean
@@ -60,9 +61,11 @@ const AddUser: React.FC<Props> = ({ isOpen, onClose }) => {
                             Add New User
                         </h2>
 
-                        <button onClick={onClose}
-                            className="text-gray-400 hover:text-gray-700 text-xl">
-                            ✕
+                        <button
+                            onClick={onClose}
+                            className="text-red-400 hover:text-red-700">
+                            <GrFormClose size={40}
+                            />
                         </button>
                     </div>
 

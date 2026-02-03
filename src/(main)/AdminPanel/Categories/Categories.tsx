@@ -116,7 +116,7 @@ const Categories = () => {
     const updateStatus = async (id: string, status: boolean) => {
         try {
             const res = await PUT({
-                url: `admin/categories/${id}/active`,
+                url: `admin/categories/${id}`,
                 data: { isActive: status },
                 toast: true
             });
@@ -138,9 +138,8 @@ const Categories = () => {
                 url: `/api/admin/categories/${modalId}`,
                 toast: true
             });
-            console.log(res);
 
-            const index = categories.findIndex((item: any) => item._id === modalId);
+            const index = categories.findIndex((item: any) => item._id === res?.data?._id);
             categories.slice(index, 1);
         }
         catch (e: any) { }
@@ -148,6 +147,18 @@ const Categories = () => {
             setDeleteConfirm(false);
         }
     }
+
+    const joinImageUrl = (base: string, path?: string) => {
+        if (!path) {
+            return "https://cdn.iconscout.com/icon/free/png-256/free-category-icon-svg-download-png-267498.png";
+        }
+
+        let cleanBase = base.replace(/api\/?$/, "");
+        cleanBase = cleanBase.replace(/\/+$/, "");
+        const cleanPath = path.replace(/^\/+/, "");
+
+        return `${cleanBase}/${cleanPath}`;
+    };
 
     return (
         <div className=" min-h-screen">
@@ -174,89 +185,102 @@ const Categories = () => {
                     </button>
                 </div>
 
-                <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto mt-6">
-                    <table className="min-w-225 w-full">
-                        <thead>
-                            <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
-                                <th className="px-4 py-3">Image</th>
-                                <th className="px-4 py-3">Name</th>
-                                <th className="px-4 py-3">Products</th>
-                                <th className="px-4 py-3">Status</th>
-                                <th className="px-4 py-3">Created at</th>
-                                <th className="px-4 py-3 text-center">Actions</th>
-                            </tr>
-                        </thead>
-
-                        <tbody className="text-sm text-gray-800">
-                            {
-                                categories.map((item: any) => (
-                                    <tr key={item._id}
-                                        className="border-t hover:bg-gray-50 border-gray-300">
-                                        <td className="px-4 py-4">
-                                            <div className="w-16 h-16 overflow-hidden rounded-lg">
-                                                <img
-                                                    src={item.Image}
-                                                    alt={item.Name}
-                                                    className="w-16 h-16 object-cover"
-                                                />
-                                            </div>
-                                        </td>
-
-                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                            {item.Name}
-                                        </td>
-
-                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500">
-                                            {item.Products} products
-                                        </td>
-
-                                        <td className="px-4 py-4">
-                                            <Toggle
-                                                status={item.Status}
-                                                toggleName={'status'}
-                                                onChange={() => updateStatus(item._id, !item.isActive)}
-                                            />
-                                        </td>
-
-                                        <td className="px-4 py-4 text-sm font-semibold text-gray-500 text-nowrap">
-                                            {new Date(item.Created).toLocaleString()}
-                                        </td>
-
-                                        <td className="px-4 py-4">
-                                            <div className="flex justify-center items-center gap-4">
-                                                <button
-                                                    className="text-sm font-semibold text-gray-500 hover:underline"
-                                                    onClick={() => navigate(`/edit-category/${item._id}`)}
-                                                >
-                                                    Edit
-                                                </button>
-
-                                                <button
-                                                    className="text-sm font-semibold text-red-500 hover:underline"
-                                                    onClick={() => {
-                                                        setDeleteConfirm(true);
-                                                        setModalId(item._id);
-                                                    }}
-                                                >
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </td>
+                {
+                    (categories?.length > 0) &&
+                    (
+                        <div className="bg-white border border-gray-300 rounded-xl overflow-x-auto mt-6">
+                            <table className="min-w-225 w-full">
+                                <thead>
+                                    <tr className="bg-gray-100 text-sm font-semibold text-gray-600">
+                                        <th className="px-4 py-3">Image</th>
+                                        <th className="px-4 py-3">Name</th>
+                                        <th className="px-4 py-3">
+                                            GiftCards
+                                        </th>
+                                        <th className="px-4 py-3">Status</th>
+                                        <th className="px-4 py-3">Created at</th>
+                                        <th className="px-4 py-3 text-center">Actions</th>
                                     </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
 
+                                <tbody className="text-sm text-gray-800">
+                                    {
+                                        categories.map((item: any) => (
+                                            <tr key={item._id}
+                                                className="border-t hover:bg-gray-50 border-gray-300">
+                                                <td className="px-4 py-4">
+                                                    <div className="w-16 h-16 overflow-hidden rounded-lg">
+                                                        <img
+                                                            src={joinImageUrl(import.meta.env.VITE_API_BASE_URL, item?.image)}
+                                                            alt={item?.name}
+                                                            className="w-16 h-16 object-cover"
+                                                            crossOrigin="anonymous"
+                                                        />
+                                                    </div>
+                                                </td>
+
+                                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
+                                                    {item?.name}
+                                                </td>
+
+                                                <td className="px-4 py-4 text-sm font-semibold text-gray-500">
+                                                    {item?.giftCards?.length || 0} GiftCards
+                                                </td>
+
+                                                <td className="px-4 py-4">
+                                                    <Toggle
+                                                        status={item?.isActive}
+                                                        toggleName={'status'}
+                                                        onChange={() => updateStatus(item?._id, !item?.isActive)}
+                                                    />
+                                                </td>
+
+                                                <td className="px-4 py-4 text-sm font-semibold text-gray-500 text-nowrap">
+                                                    {new Date(item?.createdAt).toLocaleString()}
+                                                </td>
+
+                                                <td className="px-4 py-4">
+                                                    <div className="flex justify-center items-center gap-4">
+                                                        <button
+                                                            className="text-sm font-semibold text-gray-500 hover:underline"
+                                                            onClick={() => navigate(`/edit-category/${item?._id}`)}
+                                                        >
+                                                            Edit
+                                                        </button>
+
+                                                        <button
+                                                            className="text-sm font-semibold text-red-500 hover:underline"
+                                                            onClick={() => {
+                                                                setDeleteConfirm(true);
+                                                                setModalId(item?._id);
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
             </div>
 
-            <DeleteConfirmation
-                isOpen={isDeleteConfirm}
-                onClose={() => setDeleteConfirm(false)}
-                onDelete={deleteCategory}
-            />
+            {
+                isDeleteConfirm &&
+                (
+                    <DeleteConfirmation
+                        isOpen={isDeleteConfirm}
+                        onClose={() => setDeleteConfirm(false)}
+                        onDelete={deleteCategory}
+                    />
+                )
+            }
         </div>
     );
 };
+
 export default Categories;

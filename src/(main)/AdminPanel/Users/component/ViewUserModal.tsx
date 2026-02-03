@@ -23,7 +23,9 @@ const ViewUserModal: React.FC<Props> = ({ isOpen, onClose, userId }) => {
         try {
             const res = await FETCH({
                 url: `admin/users/${userId}`,
-                toast: true
+                toast: true,
+                showError: true,
+                showSuccess: false
             });
 
             setUser(res.data);
@@ -87,7 +89,7 @@ const ViewUserModal: React.FC<Props> = ({ isOpen, onClose, userId }) => {
                             <DetailItem
                                 icon={<MdQrCode />}
                                 label="Emails"
-                                value={user?.email}
+                                value={user?.email?.value || user?.email?.isVerified || user?.email}
                             />
 
                             <DetailItem
