@@ -133,7 +133,7 @@ const UserList = () => {
                                                 </td>
 
                                                 <td className="px-4 py-4 font-semibold text-gray-500">
-                                                    {user?.email?.value || user?.email?.isVerified || user?.email || ''}
+                                                    {user?.email?.value || (typeof user?.email === "string" ? user?.email : '')}
                                                 </td>
 
                                                 <td className="px-4 py-4 font-semibold text-gray-500">
