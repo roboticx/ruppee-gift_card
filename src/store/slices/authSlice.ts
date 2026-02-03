@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 
 interface AuthState {
     isLoggedIn: boolean;
