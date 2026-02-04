@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { CiShoppingCart } from 'react-icons/ci';
 import { FiChevronLeft, FiChevronRight, FiUsers } from "react-icons/fi";
 import { LuFolderTree, LuPackage } from 'react-icons/lu';
-import { MdOutlineDashboard } from 'react-icons/md';
-import { VscGraph } from 'react-icons/vsc';
+import { MdOutlineDashboard, MdOutlineViewInAr } from 'react-icons/md';
 
 const AdminSidebar = () => {
 
@@ -39,9 +38,9 @@ const AdminSidebar = () => {
             icon: CiShoppingCart
         },
         {
-            title: 'Analytics',
-            route: 'analytics',
-            icon: VscGraph
+            title: 'Apperance',
+            route: 'apperance',
+            icon: MdOutlineViewInAr
         },
     ];
 
