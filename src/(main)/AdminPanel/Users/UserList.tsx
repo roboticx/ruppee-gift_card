@@ -109,6 +109,11 @@ const UserList = () => {
                             <table className="min-w-225 w-full border-collapse">
                                 <thead>
                                     <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                        <th className="px-4 py-3 flex items-center justify-center">
+                                            <div className="h-7 w-7 flex justify-center items-center bg-gray-300 rounded-full font-semibold">
+                                                #
+                                            </div>
+                                        </th>
                                         <th className="px-4 py-3">Name</th>
                                         <th className="px-4 py-3">Emails</th>
                                         <th className="px-4 py-3">Phone</th>
@@ -129,6 +134,9 @@ const UserList = () => {
                                                     <div className="h-7 w-7 flex justify-center  items-center bg-gray-300 rounded-full font-semibold">
                                                         {user?.userName[0]}
                                                     </div>
+                                                </td>
+
+                                                <td className="px-4 py-4 font-semibold">
                                                     {user?.userName}
                                                 </td>
 

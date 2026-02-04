@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IoMdTrendingUp } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { FaEye, FaFileAlt } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
 import ViewMore from "./Components/ViewMore";
+import Analytics from "../Analytics/Analytics";
 
 const Overview = () => {
     const [isOpen, setISopen] = useState(false);
@@ -36,65 +36,7 @@ const Overview = () => {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-
-                <div className="p-5 bg-green-100 border border-green-600 flex flex-col gap-3 rounded-2xl">
-                    <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                        Total Users
-                    </p>
-
-                    <div className="w-full flex justify-between items-center">
-                        <p className="text-xl sm:text-2xl font-bold">
-                            21
-                        </p>
-
-                        <IoMdTrendingUp className="text-red-600 text-xl" />
-                    </div>
-                </div>
-
-                <div className="p-5 flex border-red-400 bg-[#FEF2F2] border flex-col gap-3 rounded-2xl">
-                    <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                        Active Products
-                    </p>
-
-                    <div className="w-full flex justify-between items-center">
-                        <p className="text-xl sm:text-2xl font-bold">
-                            21
-                        </p>
-
-                        <IoMdTrendingUp className="text-red-600 text-xl" />
-                    </div>
-                </div>
-
-                <div className="p-5 flex border-yellow-500 bg-[#FFF7ED] border flex-col gap-3 rounded-2xl">
-                    <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                        Total Orders
-                    </p>
-
-                    <div className="w-full flex justify-between items-center">
-                        <p className="text-xl sm:text-2xl font-bold">
-                            21
-                        </p>
-
-                        <IoMdTrendingUp className="text-red-600 text-xl" />
-                    </div>
-                </div>
-
-                <div className="p-5 flex border-purple-400 bg-[#FAF5FF] border flex-col gap-3 rounded-2xl">
-                    <p className="text-sm sm:text-lg font-semibold text-gray-400">
-                        Revenue
-                    </p>
-
-                    <div className="w-full flex justify-between items-center">
-                        <p className="text-xl sm:text-2xl font-bold">
-                            21
-                        </p>
-
-                        <IoMdTrendingUp className="text-red-600 text-xl" />
-                    </div>
-                </div>
-
-            </div>
+            <Analytics />
 
             <div className="mt-6">
                 <h1 className="text-lg sm:text-xl font-semibold">
@@ -212,7 +154,6 @@ const Overview = () => {
                 }
 
             </div>
-
         </div>
     )
 }
