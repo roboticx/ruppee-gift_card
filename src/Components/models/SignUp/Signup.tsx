@@ -4,6 +4,7 @@ import { SiAmazonsimpleemailservice } from "react-icons/si";
 import { setSigninModal } from "../../../store/slices/authSlice";
 import { useAppDispatch } from "../../../store/store";
 import { createPortal } from "react-dom";
+import { POST } from "../../../utils/apiutils";
 
 interface Props {
   isOpen: boolean;
@@ -15,6 +16,10 @@ const SignUpComponent: React.FC<Props> = ({ isOpen }) => {
   const [showOtp, setShowOtp] = useState(false)
   const [panLoading, setPanLoading] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [canResend, setCanResend] = useState(true);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -27,25 +32,110 @@ const SignUpComponent: React.FC<Props> = ({ isOpen }) => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isOpen, dispatch]);
 
+
+  const sendOtp = async () => {
+    if (emailLoading) return;
+    setEmailLoading(true);
+
+    try {
+      const res = await POST({
+        url: 'auth/send-otp',
+        data: { email: email },
+        toast: true
+      });
+
+      if (res.status === "SUCCESS") {
+        startOtpTimer(setTimeLeft, setCanResend);
+        setShowOtp(true);
+      }
+    }
+    catch (e: any) { }
+    finally {
+      setEmailLoading(false);
+    }
+  };
+
+  const verifyOtp = async () => {
+    if (emailLoading) return;
+    setEmailLoading(true);
+
+    try {
+      const res = await POST({
+        url: 'auth/verify-otp',
+        data: { email, otp },
+        toast: true
+      });
+
+      if (res.status === "SUCCESS") {
+        setShowOtp(true);
+      }
+    }
+    catch (e: any) { }
+    finally {
+      setEmailLoading(false);
+    }
+  };
+
+  const resendOtp = async () => {
+    if (emailLoading) return;
+    setEmailLoading(true);
+
+    try {
+      const res = await POST({
+        url: 'auth/resend-otp',
+        data: { email },
+        toast: true
+      });
+
+      if (res.status === "SUCCESS") {
+        startOtpTimer(setTimeLeft, setCanResend);
+      }
+    }
+    catch (e: any) { }
+    finally {
+      setEmailLoading(false);
+    }
+  };
+
+  const startOtpTimer = (
+    setTimeLeft: React.Dispatch<React.SetStateAction<number>>,
+    setCanResend: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    setCanResend(false);
+    setTimeLeft(60);
+
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setCanResend(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+
   if (!isOpen) return null;
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-137.5 bg-white rounded-3xl shadow-2xl overflow-hidden">
         <div className="flex w-full">
-          <div
+          <button
             onClick={() => setToggleCards(true)}
             className="w-1/2 bg-[#2B6777] text-white text-center py-5 font-semibold text-lg border-r border-slate-400"
           >
             PAN CARD
-          </div>
+          </button>
 
-          <div
+          <button
             onClick={() => setToggleCards(false)}
             className="w-1/2 bg-[#2b6777de] text-white text-center py-5 font-semibold text-lg"
           >
             EMAIL
-          </div>
+          </button>
         </div>
 
         {
@@ -115,25 +205,51 @@ const SignUpComponent: React.FC<Props> = ({ isOpen }) => {
                     type="text"
                     placeholder="Enter email"
                     className="py-3 px-6 rounded-full border border-[#2B6777] text-[#2B6777] text-lg  outline-0"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
 
                   {
-                    showOtp ? <input
-                      type="text"
-                      placeholder="Enter 6 digit OTP"
-                      className="py-3 px-6 rounded-full border border-[#2B6777] text-[#2B6777]  tracking-widest text-md
-                     outline-0"/> : ""
+                    showOtp ? (
+                      <div >
+                        <input
+                          type="text"
+                          placeholder="Enter 6 digit OTP"
+                          className="w-full py-3 px-6 rounded-full border border-[#2B6777] text-[#2B6777] tracking-widest text-md outline-0"
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value)}
+                        />
+
+                        <p className="text-[18px] text-black/90 leading-relaxed mt-3 font-normal text-end">
+                          Don’t receive it yet? {" "}
+                          {canResend
+                            ? (
+                              <button
+                                className="underline text-blue-500 font-semibold"
+                                onClick={resendOtp}
+                              >
+                                Resend OTP
+                              </button>
+                            )
+                            : (
+                              <span>
+                                Retry again in {" "}
+                                <span className="text-red-500">
+                                  {timeLeft}s
+                                </span>
+                              </span>
+                            )
+                          }
+                        </p>
+
+                      </div>
+                    )
+                      : ""
                   }
 
                   <button
                     disabled={emailLoading}
-                    onClick={() => {
-                      setEmailLoading(true);
-                      setTimeout(() => {
-                        setEmailLoading(false);
-                        setShowOtp(true);
-                      }, 2000);
-                    }}
+                    onClick={showOtp ? verifyOtp : sendOtp}
                     className="mt-2 bg-[#2B6777] disabled:opacity-60
                     text-white py-3 rounded-full text-lg font-semibold
                     flex justify-center items-center gap-2"
